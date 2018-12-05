@@ -9,8 +9,12 @@ parser.on("track", function(track) {
     console.log("track:", track);
 });
 
-parser.on("album", function(album) {
-    console.log("album:", album);
-});
+// parser.on("album", function(album) {
+//     console.log("album:", album);
+// });
+
+// parser.on("artist", function(artist) {
+//   console.log("artist:", artist);
+// });
 
 stream.pipe(parser);

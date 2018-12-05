@@ -42,28 +42,31 @@ router.get('/', (req, res) => {
 });
 
 router.get('/album/:album', (req, res) => {
-    console.log(req.params.album);
+    const results = songs
+        .filter(song => song.album && song.album.includes(req.params.album));
     console.log(req.query);
-    res.json({ message: 'get by album' });
+    res.json({ results });
 });
 
 router.get('/artist/:artist', (req, res) => {
-    console.log(req.params.artist);
+    const results = songs
+        .filter(song => song.artist && song.artist.includes(req.params.artist));
     console.log(req.query);
-    res.json({ message: 'get by artist' });
+    res.json({ results });
 });
 
 router.get('/length/min/:min/max/:max', (req, res) => {
-    console.log(req.params.min);
-    console.log(req.params.max);
+    const results = songs
+        .filter(song => song.length && song.length > req.params.min * 1000 && song.length < req.params.max * 1000);
     console.log(req.query);
-    res.json({ message: 'get by length' });
+    res.json({ results });
 });
 
 router.get('/title/:title', (req, res) => {
-    console.log(req.params.title);
+    const results = songs
+        .filter(song => song.title && song.title.includes(req.params.title));
     console.log(req.query);
-    res.json({ message: 'get by title' });
+    res.json({ results });
 });
 
 app.use('/api', router);

@@ -12,10 +12,9 @@ const itunes = require("itunes-data");
 const parser = itunes.parser();
 const stream = fs.createReadStream("./library.xml");
 
-let noSongs = 0
+let songs = []
 
 parser.on("track", track => {
-    // noSongs++;
     const song = {
         album: track['Album'],
         artist: track['Artist'],
@@ -26,8 +25,7 @@ parser.on("track", track => {
         },
         title: track['Name']
     }
-      noSongs++;
-      console.log("song:", song);
+    songs.push(song);
 });
 
 stream.pipe(parser);
@@ -65,7 +63,7 @@ router.get('/length/min/:min/max/:max', (req, res) => {
 router.get('/title/:title', (req, res) => {
     console.log(req.params.title);
     console.log(req.query);
-	  res.json({ message: 'get by title' });
+    res.json({ message: 'get by title' });
 });
 
 app.use('/api', router);

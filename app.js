@@ -47,26 +47,26 @@ router.get('/', (req, res) => {
 });
 
 router.get('/album/:album', (req, res) => {
-    console.log(req.album);
+    console.log(req.params.album);
     console.log(req.query);
     res.json({ message: 'get by album' });
 });
 
 router.get('/artist/:artist', (req, res) => {
-    console.log(req.artist);
+    console.log(req.params.artist);
     console.log(req.query);
     res.json({ message: 'get by artist' });
 });
 
 router.get('/length/min/:min/max/:max', (req, res) => {
-    console.log(req.min);
-    console.log(req.max);
+    console.log(req.params.min);
+    console.log(req.params.max);
     console.log(req.query);
     res.json({ message: 'get by length' });
 });
 
 router.get('/title/:title', (req, res) => {
-    console.log(req.title);
+    console.log(req.params.title);
     console.log(req.query);
 	  res.json({ message: 'get by title' });
 });

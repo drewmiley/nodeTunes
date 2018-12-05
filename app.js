@@ -1,28 +1,26 @@
 console.log('RUNNING');
 
-// var fs = require("fs");
-// var itunes = require("itunes-data");
-// var parser = itunes.parser();
-// var stream = fs.createReadStream("./library.xml");
+// const fs = require("fs");
+// const itunes = require("itunes-data");
+// const parser = itunes.parser();
+// const stream = fs.createReadStream("./library.xml");
 
 // let noSongs = 0
 
-// parser.on("track", function(track) {
+// parser.on("track", track => {
 //     // noSongs++;
-//     const track1 = {
+//     const song = {
 //         album: track['Album'],
 //         artist: track['Artist'],
 //         length: track['Total Time'],
-//         name: track['Name'],
 //         runningOrder: {
 //             ...(track['Disc Count'] > 1 && { disc: track['Disc Number'] }),
 //             number: track['Track Number']
-//         }
+//         },
+//         title: track['Name']
 //     }
-//     if (track1.runningOrder.disc) {
-//         noSongs++;
-//         console.log("track name:", track1);
-//     }
+      // noSongs++;
+      // console.log("song:", song);
 //     console.log(noSongs);
 // });
 
@@ -38,20 +36,41 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 const port = process.env.PORT || 8000;
 
-// API routes
 const router = express.Router();
-
-// Middleware
 router.use((req, res, next) => {
-	console.log('Making request');
-	next();
+    console.log('Making request');
+    next();
 });
 
 router.get('/', (req, res) => {
-	res.json({ message: 'nodeTunes is running' });
+    res.json({ message: 'nodeTunes is running' });
 });
 
-// START THE SERVER
+router.get('/album/:album', (req, res) => {
+    console.log(req.album);
+    console.log(req.query);
+    res.json({ message: 'get by album' });
+});
+
+router.get('/artist/:artist', (req, res) => {
+    console.log(req.artist);
+    console.log(req.query);
+    res.json({ message: 'get by artist' });
+});
+
+router.get('/length/min/:min/max/:max', (req, res) => {
+    console.log(req.min);
+    console.log(req.max);
+    console.log(req.query);
+    res.json({ message: 'get by length' });
+});
+
+router.get('/title/:title', (req, res) => {
+    console.log(req.title);
+    console.log(req.query);
+	  res.json({ message: 'get by title' });
+});
+
 app.use('/api', router);
 app.listen(port);
 console.log(`Starting server on port ${ port }`);

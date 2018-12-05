@@ -37,7 +37,7 @@ router.use((req, res, next) => {
 });
 
 router.get('/', (req, res) => {
-    console.log(noSongs);
+    console.log(songs.length);
     res.json({ message: 'nodeTunes is running' });
 });
 

@@ -38,7 +38,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://localhost:8000/api/album/Speaking%20In%20Tongues",
+					"raw": "http://localhost:8000/api/album/Speaking%20In%20Tongues?sortBy=songNumber&artist=Talking Heads",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -48,6 +48,16 @@
 						"api",
 						"album",
 						"Speaking%20In%20Tongues"
+					],
+					"query": [
+						{
+							"key": "sortBy",
+							"value": "songNumber"
+						},
+						{
+							"key": "artist",
+							"value": "Talking Heads"
+						}
 					]
 				}
 			},
@@ -63,7 +73,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://localhost:8000/api/artist/Talking%20Heads",
+					"raw": "http://localhost:8000/api/artist/Talking%20Heads?sortBy=album&album=Speaking In Tongues&title=Burning",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -73,6 +83,20 @@
 						"api",
 						"artist",
 						"Talking%20Heads"
+					],
+					"query": [
+						{
+							"key": "sortBy",
+							"value": "album"
+						},
+						{
+							"key": "album",
+							"value": "Speaking In Tongues"
+						},
+						{
+							"key": "title",
+							"value": "Burning"
+						}
 					]
 				}
 			},
@@ -88,7 +112,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://localhost:8000/api/length/min/450/max/900",
+					"raw": "http://localhost:8000/api/length/min/450/max/900?sortBy=length&artist=David Bowie&album=Station To Station",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -101,6 +125,20 @@
 						"450",
 						"max",
 						"900"
+					],
+					"query": [
+						{
+							"key": "sortBy",
+							"value": "length"
+						},
+						{
+							"key": "artist",
+							"value": "David Bowie"
+						},
+						{
+							"key": "album",
+							"value": "Station To Station"
+						}
 					]
 				}
 			},
@@ -116,7 +154,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://localhost:8000/api/title/House",
+					"raw": "http://localhost:8000/api/title/House?sortBy=title&artist=Talking Heads&album=Speaking In Tongues",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -126,6 +164,20 @@
 						"api",
 						"title",
 						"House"
+					],
+					"query": [
+						{
+							"key": "sortBy",
+							"value": "title"
+						},
+						{
+							"key": "artist",
+							"value": "Talking Heads"
+						},
+						{
+							"key": "album",
+							"value": "Speaking In Tongues"
+						}
 					]
 				}
 			},

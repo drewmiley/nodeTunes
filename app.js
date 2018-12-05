@@ -48,7 +48,7 @@ router.use((req, res, next) => {
 });
 
 router.get('/', (req, res) => {
-	res.json({ message: 'hooray! welcome to our api!' });
+	res.json({ message: 'nodeTunes is running' });
 });
 
 // START THE SERVER

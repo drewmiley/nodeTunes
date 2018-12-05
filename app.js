@@ -42,29 +42,42 @@ router.get('/', (req, res) => {
 });
 
 router.get('/album/:album', (req, res) => {
+  // Allowed query params- sortBy, artist
+  // SortBy options- album, artist, length, SONGNUMBER
     const results = songs
         .filter(song => song.album && song.album.includes(req.params.album));
+    console.log(req.params.album);
     console.log(req.query);
     res.json({ results });
 });
 
 router.get('/artist/:artist', (req, res) => {
+  // Allowed query params- sortBy, album, title
+  // SortBy options- ALBUM, length, title
     const results = songs
         .filter(song => song.artist && song.artist.includes(req.params.artist));
+    console.log(req.params.artist);
     console.log(req.query);
     res.json({ results });
 });
 
 router.get('/length/min/:min/max/:max', (req, res) => {
+  // Allowed query params- sortBy, album, artist
+  // SortBy options- album, artist, LENGTH, title
     const results = songs
         .filter(song => song.length && song.length > req.params.min * 1000 && song.length < req.params.max * 1000);
+    console.log(req.params.min);
+    console.log(req.params.max);
     console.log(req.query);
     res.json({ results });
 });
 
 router.get('/title/:title', (req, res) => {
+  // Allowed query params- sortBy, album, artist
+  // SortBy options- album, artist, length, TITLE
     const results = songs
         .filter(song => song.title && song.title.includes(req.params.title));
+    console.log(req.params.title);
     console.log(req.query);
     res.json({ results });
 });

@@ -43,12 +43,9 @@ router.get('/', (req, res) => {
 
 const sortBy = field => (a, b) => (a[field] > b[field]) - (a[field] < b[field]);
 
-// TODO: CLEAN THIS UP
 const filterByQueryParams = queryParams => song => {
     const fields = Object.keys(queryParams).filter(field => field !== 'sortBy');
-    return fields.reduce((passFilter, field) => {
-        return passFilter && (song[field] && song[field].includes(queryParams[field]))
-    }, true);
+    return fields.find(field =>!(song[field] && song[field].includes(queryParams[field]))) === undefined
 }
 
 router.get('/album/:album', (req, res) => {

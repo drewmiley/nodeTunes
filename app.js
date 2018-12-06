@@ -43,6 +43,7 @@ router.get('/', (req, res) => {
 
 const sortBy = field => (a, b) => (a[field] > b[field]) - (a[field] < b[field]);
 
+// TODO: CLEAN THIS UP
 const filterByQueryParams = queryParams => song => {
     const fields = Object.keys(queryParams).filter(field => field !== 'sortBy');
     return fields.reduce((passFilter, field) => {
@@ -54,6 +55,7 @@ router.get('/album/:album', (req, res) => {
     // Allowed query params- sortBy, artist
     // SortBy options- album, artist, length, SONGNUMBER
     const sortBySongNumber = (a, b) => {
+      // TODO: Implement By Disc
       return a.number - b.number;
     }
     const albumSortBy = field => (a, b) =>

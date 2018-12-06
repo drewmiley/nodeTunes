@@ -51,13 +51,8 @@ const filterByQueryParams = queryParams => song => {
 router.get('/album/:album', (req, res) => {
     // Allowed query params- sortBy, artist
     // SortBy options- album, artist, length, SONGNUMBER
-    const sortBySongNumber = (a, b) => {
-        if (a.disc && b.disc) {
-            return a.disc === b.disc ? a.number - b.number : a.disc - b.disc;
-        } else {
-           return a.number - b.number;
-        }
-    }
+    const sortBySongNumber = (a, b) =>
+        (a.disc && b.disc && a.disc !== b.disc) ? a.disc - b.disc : a.number - b.number
     const albumSortBy = field => (a, b) =>
         (field !== 'songNumber'
           ? (a[field] > b[field]) - (a[field] < b[field])

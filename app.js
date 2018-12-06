@@ -43,8 +43,15 @@ router.get('/', (req, res) => {
 
 const sortBy = field => (a, b) => (a[field] > b[field]) - (a[field] < b[field]);
 
+const filterByQueryParams = queryParams => song => {
+    const fields = Object.keys(queryParams).filter(field => field !== 'sortBy');
+    return fields.reduce((passFilter, field) => {
+        return passFilter && (song[field] && song[field].includes(queryParams[field]))
+    }, true);
+}
+
 router.get('/album/:album', (req, res) => {
-  // Allowed query params- sortBy, artist
+    // Allowed query params- sortBy, artist
     // SortBy options- album, artist, length, SONGNUMBER
     const sortBySongNumber = (a, b) => {
       return a.number - b.number;
@@ -55,6 +62,7 @@ router.get('/album/:album', (req, res) => {
           : sortBySongNumber(a.runningOrder, b.runningOrder));
     const results = songs
         .filter(song => song.album && song.album.includes(req.params.album))
+        .filter(filterByQueryParams(req.query))
         .sort(albumSortBy(req.query.sortBy || 'songNumber'));
     console.log(req.params.album);
     console.log(req.query);
@@ -62,10 +70,11 @@ router.get('/album/:album', (req, res) => {
 });
 
 router.get('/artist/:artist', (req, res) => {
-  // Allowed query params- sortBy, album, title
+    // Allowed query params- sortBy, album, title
     // SortBy options- ALBUM, length, title
     const results = songs
         .filter(song => song.artist && song.artist.includes(req.params.artist))
+        .filter(filterByQueryParams(req.query))
         .sort(sortBy(req.query.sortBy || 'album'));
     console.log(req.params.artist);
     console.log(req.query);
@@ -73,10 +82,11 @@ router.get('/artist/:artist', (req, res) => {
 });
 
 router.get('/length/min/:min/max/:max', (req, res) => {
-  // Allowed query params- sortBy, album, artist
+    // Allowed query params- sortBy, album, artist
     // SortBy options- album, artist, LENGTH, title
     const results = songs
         .filter(song => song.length && song.length > req.params.min * 1000 && song.length < req.params.max * 1000)
+        .filter(filterByQueryParams(req.query))
         .sort(sortBy(req.query.sortBy || 'length'));
     console.log(req.params.min);
     console.log(req.params.max);
@@ -85,10 +95,11 @@ router.get('/length/min/:min/max/:max', (req, res) => {
 });
 
 router.get('/title/:title', (req, res) => {
-  // Allowed query params- sortBy, album, artist
+    // Allowed query params- sortBy, album, artist
     // SortBy options- album, artist, length, TITLE
     const results = songs
         .filter(song => song.title && song.title.includes(req.params.title))
+        .filter(filterByQueryParams(req.query))
         .sort(sortBy(req.query.sortBy || 'title'));
     console.log(req.params.title);
     console.log(req.query);

@@ -97,6 +97,7 @@ router.get('/title/:title', (req, res) => {
 router.get('/albums', (req, res) => {
     // TODO: Tidy up
     // TODO: Query params
+    // TODO: Albums contain songs
     const results = songs.reduce((acc, song) => {
         const albums = acc.map(d => ({ ...d }));
         if (!albums.find(album => album.title === song.album)) {

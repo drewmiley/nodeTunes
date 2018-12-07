@@ -95,7 +95,20 @@ router.get('/title/:title', (req, res) => {
 });
 
 router.get('/albums', (req, res) => {
-    const results = 'results'
+    // TODO: Tidy up
+    // TODO: Query params
+    const results = songs.reduce((acc, song) => {
+        const albums = acc.map(d => ({ ...d }));
+        if (!albums.find(album => album.title === song.album)) {
+            const newAlbum = {
+                title: song.album,
+                artist: song.artist
+            }
+            return albums.concat([newAlbum])
+        } else {
+            return albums
+        }
+    }, [])
     res.json({ results });
 });
 

@@ -61,8 +61,6 @@ router.get('/album/:album', (req, res) => {
         .filter(song => song.album && song.album.includes(req.params.album))
         .filter(filterByQueryParams(req.query))
         .sort(albumSortBy(req.query.sortBy || 'songNumber'));
-    console.log(req.params.album);
-    console.log(req.query);
     res.json({ results });
 });
 
@@ -73,8 +71,6 @@ router.get('/artist/:artist', (req, res) => {
         .filter(song => song.artist && song.artist.includes(req.params.artist))
         .filter(filterByQueryParams(req.query))
         .sort(sortBy(req.query.sortBy || 'album'));
-    console.log(req.params.artist);
-    console.log(req.query);
     res.json({ results });
 });
 
@@ -85,9 +81,6 @@ router.get('/length/min/:min/max/:max', (req, res) => {
         .filter(song => song.length && song.length > req.params.min * 1000 && song.length < req.params.max * 1000)
         .filter(filterByQueryParams(req.query))
         .sort(sortBy(req.query.sortBy || 'length'));
-    console.log(req.params.min);
-    console.log(req.params.max);
-    console.log(req.query);
     res.json({ results });
 });
 
@@ -98,8 +91,16 @@ router.get('/title/:title', (req, res) => {
         .filter(song => song.title && song.title.includes(req.params.title))
         .filter(filterByQueryParams(req.query))
         .sort(sortBy(req.query.sortBy || 'title'));
-    console.log(req.params.title);
-    console.log(req.query);
+    res.json({ results });
+});
+
+router.get('/albums', (req, res) => {
+    const results = 'results'
+    res.json({ results });
+});
+
+router.get('/artists', (req, res) => {
+    const results = 'results'
     res.json({ results });
 });
 

@@ -110,9 +110,14 @@ router.get('/albums', (req, res) => {
 
 router.get('/artists', (req, res) => {
     // TODO: Query params
-    // TODO: Implement albums on here
     const artists = [...new Set(songs.map(song => song.artist))]
-        .map(artist => ({ name: artist }));
+        .map(artist => {
+            const artistSongs = songs.filter(song => song.artist === artist);
+            return {
+                name: artist,
+                albums: [...new Set(artistSongs.map(song => song.album))]
+            }
+        })
     res.json({ results: artists });
 });
 

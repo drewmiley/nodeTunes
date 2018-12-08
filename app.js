@@ -48,7 +48,7 @@ const filterByQueryParams = queryParams => song => {
     return fields.find(field =>!(song[field] && song[field].includes(queryParams[field]))) === undefined
 }
 
-router.get('/album/:album', (req, res) => {
+router.get('/songs/album/:album', (req, res) => {
     // Allowed query params- sortBy, artist
     // SortBy options- album, artist, length, SONGNUMBER
     const sortBySongNumber = (a, b) =>
@@ -64,7 +64,7 @@ router.get('/album/:album', (req, res) => {
     res.json({ results });
 });
 
-router.get('/artist/:artist', (req, res) => {
+router.get('/songs/artist/:artist', (req, res) => {
     // Allowed query params- sortBy, album, title
     // SortBy options- ALBUM, length, title
     const results = songs
@@ -74,7 +74,7 @@ router.get('/artist/:artist', (req, res) => {
     res.json({ results });
 });
 
-router.get('/length/min/:min/max/:max', (req, res) => {
+router.get('/songs/length/min/:min/max/:max', (req, res) => {
     // Allowed query params- sortBy, album, artist
     // SortBy options- album, artist, LENGTH, title
     const results = songs
@@ -84,7 +84,7 @@ router.get('/length/min/:min/max/:max', (req, res) => {
     res.json({ results });
 });
 
-router.get('/title/:title', (req, res) => {
+router.get('/songs/title/:title', (req, res) => {
     // Allowed query params- sortBy, album, artist
     // SortBy options- album, artist, length, TITLE
     const results = songs

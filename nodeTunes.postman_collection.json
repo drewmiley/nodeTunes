@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "71b53d5f-771b-4a91-bb85-e9e407ea716d",
+		"_postman_id": "ae296505-adac-4ba9-972e-5bfb19ec5166",
 		"name": "nodeTunes",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -38,7 +38,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://localhost:8000/api/album/Speaking%20In%20Tongues?sortBy=songNumber&artist=Talking Heads",
+					"raw": "http://localhost:8000/api/songs/album/Speaking%20In%20Tongues?sortBy=songNumber&artist=Talking Heads",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -46,6 +46,7 @@
 					"port": "8000",
 					"path": [
 						"api",
+						"songs",
 						"album",
 						"Speaking%20In%20Tongues"
 					],
@@ -73,7 +74,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://localhost:8000/api/artist/Talking%20Heads?sortBy=album&album=Speaking In Tongues&title=Burning",
+					"raw": "http://localhost:8000/api/songs/artist/Talking%20Heads?sortBy=album&album=Speaking In Tongues&title=Burning",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -81,6 +82,7 @@
 					"port": "8000",
 					"path": [
 						"api",
+						"songs",
 						"artist",
 						"Talking%20Heads"
 					],
@@ -112,7 +114,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://localhost:8000/api/length/min/450/max/900?sortBy=length&artist=David Bowie&album=Station To Station",
+					"raw": "http://localhost:8000/api/songs/length/min/450/max/900?sortBy=length&artist=David Bowie&album=Station To Station",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -120,6 +122,7 @@
 					"port": "8000",
 					"path": [
 						"api",
+						"songs",
 						"length",
 						"min",
 						"450",
@@ -154,7 +157,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://localhost:8000/api/title/House?sortBy=title&artist=Talking Heads&album=Speaking In Tongues",
+					"raw": "http://localhost:8000/api/songs/title/House?sortBy=title&artist=Talking Heads&album=Speaking In Tongues",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -162,6 +165,7 @@
 					"port": "8000",
 					"path": [
 						"api",
+						"songs",
 						"title",
 						"House"
 					],

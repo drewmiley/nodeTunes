@@ -43,9 +43,9 @@ router.get('/', (req, res) => {
 
 const sortBy = field => (a, b) => (a[field] > b[field]) - (a[field] < b[field]);
 
-const filterByQueryParams = queryParams => song => {
+const filterByQueryParams = queryParams => obj => {
     const fields = Object.keys(queryParams).filter(field => field !== 'sortBy');
-    return fields.find(field =>!(song[field] && song[field].includes(queryParams[field]))) === undefined
+    return fields.find(field =>!(obj[field] && obj[field].includes(queryParams[field]))) === undefined
 }
 
 router.get('/songs/album/:album', (req, res) => {
@@ -95,7 +95,8 @@ router.get('/songs/title/:title', (req, res) => {
 });
 
 router.get('/albums', (req, res) => {
-    // TODO: Query params
+    // Allowed query params- sortBy, artist
+    // SortBy options- artist, TITLE
     const albums = [...new Set(songs.map(song => song.album))]
         .map(album => {
             const albumSongs = songs.filter(song => song.album === album);
@@ -104,7 +105,9 @@ router.get('/albums', (req, res) => {
                 artist: albumSongs[0].artist,
                 songs: albumSongs.map(song => song.title)
             }
-        });
+        })
+        .filter(filterByQueryParams(req.query))
+        .sort(sortBy(req.query.sortBy || 'title'));
     res.json({ results: albums });
 });
 

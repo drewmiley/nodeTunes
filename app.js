@@ -112,7 +112,7 @@ router.get('/albums', (req, res) => {
 });
 
 router.get('/artists', (req, res) => {
-    // TODO: Query params
+    // Allowed query params- album
     const artists = [...new Set(songs.map(song => song.artist))]
         .map(artist => {
             const artistSongs = songs.filter(song => song.artist === artist);
@@ -121,6 +121,7 @@ router.get('/artists', (req, res) => {
                 albums: [...new Set(artistSongs.map(song => song.album))]
             }
         })
+        .filter(artist => !req.query.album || artist.albums.find(album => album && album.includes(req.query.album)));
     res.json({ results: artists });
 });
 

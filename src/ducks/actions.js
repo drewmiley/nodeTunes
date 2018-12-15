@@ -2,11 +2,18 @@ export const mapDispatchToProps = dispatch => {
     return { fetchData: url => dispatch(itemsFetchData(url)) };
 };
 
-function itemsFetchData(apiRoute) {
+function itemsFetchData(params) {
     return dispatch => {
         dispatch(itemsIsLoading(true));
+        let url = `http://localhost:8000/api/songs/title/${ params.title }?sortBy=title`;
+        if (params.artist) {
+            url += `&artist=${ params.artist }`;
+        }
+        if (params.album) {
+            url += `&album=${ params.album }`;
+        }
 
-        fetch(`http://localhost:8000/api/songs/artist/Talking%20Heads?sortBy=album&album=Speaking In Tongues&title=Burning`)
+        fetch(url)
             .then(response => {
                 if (!response.ok) {
                     throw Error(response.statusText);

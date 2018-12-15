@@ -85,11 +85,11 @@ router.get('/songs/length/min/:min/max/:max', (req, res) => {
     res.json({ results });
 });
 
-router.get('/songs/title/:title', (req, res) => {
+router.get('/songs/title/:title?', (req, res) => {
     // Allowed query params- sortBy, album, artist
     // SortBy options- album, artist, length, TITLE
     const results = songs
-        .filter(song => song.title && song.title.toUpperCase().includes(req.params.title.toUpperCase()))
+        .filter(song => !req.params.title || (song.title && song.title.toUpperCase().includes(req.params.title.toUpperCase())))
         .filter(filterByQueryParams(req.query))
         .sort(sortBy(req.query.sortBy || 'title'));
     res.json({ results });

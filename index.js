@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 
-import AppContainer from './AppContainer';
+import AppContainer from './src/AppContainer';
 import store from './src/ducks/store';
 
 ReactDOM.render(

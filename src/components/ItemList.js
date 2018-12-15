@@ -1,6 +1,16 @@
 import React, { Component } from 'react';
 
+import { Howl, Howler } from 'howler';
+
 class ItemList extends Component {
+    playSong(item) {
+        var sound = new Howl({
+          src: [item.location]
+        });
+
+        sound.play();
+    }
+
     render() {
         if (this.props.hasErrored) {
             return <p>Sorry! There was an error loading the items</p>;
@@ -15,12 +25,10 @@ class ItemList extends Component {
                 {this.props.items.map((item, i) => (
                     <div key={i} className='songContainer'>
                         <div>
-                            <img src={item.imageURL} alt='BAD' />
-                        </div>
-                        <div>
                             <p>{item.artist}</p>
                             <p>{item.album}</p>
                             <p>{item.title}</p>
+                            <button onClick={() => this.playSong(item)}>Play</button>
                         </div>
                     </div>
                 ))}

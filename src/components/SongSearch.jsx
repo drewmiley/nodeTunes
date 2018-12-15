@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 
 export default class SongSearch extends Component {
     componentDidMount() {
-        this.state = {
+        this.setState({
             artist: null,
             album: null,
             title: null
-        }
+        });
     }
 
     fetchData() {

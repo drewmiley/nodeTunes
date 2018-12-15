@@ -3,6 +3,10 @@ import React, { Component } from 'react';
 import { Howl, Howler } from 'howler';
 
 class ItemList extends Component {
+    componentDidMount() {
+        this.props.fetchData();
+    }
+
     playSong(item) {
         var sound = new Howl({
           src: [item.location]

@@ -5,17 +5,14 @@ import ItemList from './src/components/ItemList';
 import { mapDispatchToProps } from './src/ducks/actions';
 
 class App extends Component {
-    componentDidMount() {
-        this.props.fetchData();
-    }
-
     render() {
         return <div>
             <h1>Hello, world!</h1>
             <ItemList
-              items={this.props.items}
-              hasErrored={this.props.hasErrored}
-              isLoading={this.props.isLoading}
+                fetchData={this.props.fetchData}
+                items={this.props.items}
+                hasErrored={this.props.hasErrored}
+                isLoading={this.props.isLoading}
             />
         </div>
     }

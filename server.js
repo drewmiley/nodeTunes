@@ -46,7 +46,7 @@ const sortBy = field => (a, b) => (a[field] > b[field]) - (a[field] < b[field]);
 
 const filterByQueryParams = queryParams => obj => {
     const fields = Object.keys(queryParams).filter(field => field !== 'sortBy');
-    return fields.find(field =>!(obj[field] && obj[field].includes(queryParams[field]))) === undefined
+    return fields.find(field =>!(obj[field] && obj[field].toUpperCase().includes(queryParams[field].toUpperCase()))) === undefined
 }
 
 router.get('/songs/album/:album', (req, res) => {
@@ -59,7 +59,7 @@ router.get('/songs/album/:album', (req, res) => {
           ? (a[field] > b[field]) - (a[field] < b[field])
           : sortBySongNumber(a.runningOrder, b.runningOrder));
     const results = songs
-        .filter(song => song.album && song.album.includes(req.params.album))
+        .filter(song => song.album && song.album.toUpperCase().includes(req.params.album.toUpperCase()))
         .filter(filterByQueryParams(req.query))
         .sort(albumSortBy(req.query.sortBy || 'songNumber'));
     res.json({ results });
@@ -69,7 +69,7 @@ router.get('/songs/artist/:artist', (req, res) => {
     // Allowed query params- sortBy, album, title
     // SortBy options- ALBUM, length, title
     const results = songs
-        .filter(song => song.artist && song.artist.includes(req.params.artist))
+        .filter(song => song.artist && song.artist.toUpperCase().includes(req.params.artist.toUpperCase()))
         .filter(filterByQueryParams(req.query))
         .sort(sortBy(req.query.sortBy || 'album'));
     res.json({ results });
@@ -89,7 +89,7 @@ router.get('/songs/title/:title', (req, res) => {
     // Allowed query params- sortBy, album, artist
     // SortBy options- album, artist, length, TITLE
     const results = songs
-        .filter(song => song.title && song.title.includes(req.params.title))
+        .filter(song => song.title && song.title.toUpperCase().includes(req.params.title.toUpperCase()))
         .filter(filterByQueryParams(req.query))
         .sort(sortBy(req.query.sortBy || 'title'));
     res.json({ results });
@@ -122,7 +122,7 @@ router.get('/artists', (req, res) => {
                 albums: [...new Set(artistSongs.map(song => song.album))]
             }
         })
-        .filter(artist => !req.query.album || artist.albums.find(album => album && album.includes(req.query.album)));
+        .filter(artist => !req.query.album || artist.albums.find(album => album && album.toUpperCase().includes(req.query.album.toUpperCase())));
     res.json({ results: artists });
 });
 

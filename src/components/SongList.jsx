@@ -1,16 +1,8 @@
 import React, { Component } from 'react';
 
-import { Howl, Howler } from 'howler';
+import SongPlayer from './SongPlayer';
 
 export default class SongList extends Component {
-    playSong(item) {
-        var sound = new Howl({
-          src: [item.location]
-        });
-
-        sound.play();
-    }
-
     render() {
         if (this.props.hasErrored) {
             return <p>Sorry! There was an error loading the items</p>;
@@ -28,7 +20,7 @@ export default class SongList extends Component {
                             <p>{item.artist}</p>
                             <p>{item.album}</p>
                             <p>{item.title}</p>
-                            <button onClick={() => this.playSong(item)}>Play</button>
+                            <SongPlayer song={item} />
                         </div>
                     </div>
                 ))}

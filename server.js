@@ -10,7 +10,7 @@ const port = process.env.PORT || 8000;
 const fs = require("fs");
 const itunes = require("itunes-data");
 const parser = itunes.parser();
-const stream = fs.createReadStream("./library.xml");
+const stream = fs.createReadStream("./iTunes\ Music\ Library.xml");
 
 let songs = []
 

@@ -4,7 +4,7 @@ Backend serving iTunes data, frontend plays music. Uses node, react, howl.
 
 ## To run
 
-1. Copy your `iTunes Music Library.xml` into the root of this directory, and rename it `library.xml`
+1. Copy your `iTunes Music Library.xml` into the root of this directory
 1. `npm install`
 1. `npm run server`
 1. `npm run app`

@@ -25,10 +25,7 @@ function itemsFetchData(params) {
             })
             .then(response => response.json())
             .then(response => response.results)
-            .then(items => {
-                console.log(items);
-                dispatch(itemsFetchDataSuccess(items));
-            })
+            .then(items => dispatch(itemsFetchDataSuccess(items)))
             .catch(() => dispatch(itemsHasErrored(true)));
     };
 }

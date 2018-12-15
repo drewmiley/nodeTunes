@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import ItemList from './components/ItemList';
+import SongList from './components/SongList';
 import { mapDispatchToProps } from './ducks/actions';
 
 class App extends Component {
     render() {
         return <div>
-            <ItemList
+            <SongList
                 fetchData={this.props.fetchData}
                 items={this.props.items}
                 hasErrored={this.props.hasErrored}

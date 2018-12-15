@@ -17,9 +17,7 @@ export default class SongList extends Component {
                 {this.props.items.map((item, i) => (
                     <div key={i} className='songContainer'>
                         <div>
-                            <p>{item.artist}</p>
-                            <p>{item.album}</p>
-                            <p>{item.title}</p>
+                            <p>{item.title} - {item.artist} - {item.album}</p>
                             <SongPlayer song={item} />
                         </div>
                     </div>

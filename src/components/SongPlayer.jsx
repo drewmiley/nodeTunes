@@ -13,7 +13,7 @@ export default class SongPlayer extends Component {
     }
 
     componentDidUpdate() {
-        if (this.props.songPlayingId !== this.state.id && this.state.playing) {
+        if (this.props.onlyAllowOneSongToPlay && this.props.songPlayingId !== this.state.id && this.state.playing) {
             this.pauseSong();
         }
     }

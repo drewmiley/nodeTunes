@@ -19,6 +19,7 @@ export default class SongList extends Component {
                         <div>
                             <p>{item.title} - {item.artist} - {item.album}</p>
                             <SongPlayer
+                                onlyAllowOneSongToPlay={true}
                                 song={item}
                                 songPlayingId={this.props.songPlayingId}
                                 setSongPlayingId={this.props.setSongPlayingId}

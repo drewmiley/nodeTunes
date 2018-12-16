@@ -5,7 +5,6 @@ import { Howl, Howler } from 'howler';
 export default class SongPlayer extends Component {
     constructor(props) {
         super(props);
-        console.log(props);
         this.state = { location: props.song.location, playing: false, paused: false };
     }
 

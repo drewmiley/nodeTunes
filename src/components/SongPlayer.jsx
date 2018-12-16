@@ -35,16 +35,42 @@ export default class SongPlayer extends Component {
         this.state.song.seek(seconds + this.state.fastforward, this.state.id);
     }
 
+    playbackRate() {
+        this.state.song.rate(this.state.speed, this.state.id);
+    }
+
     render() {
         return (
             <div>
-                <button onClick={this.playSong.bind(this)}>Play</button>
-                <button onClick={this.pauseSong.bind(this)}>Pause</button>
-                <button onClick={this.stopSong.bind(this)}>Stop</button>
-                <input type='text' placeholder='Rewind Seconds' onChange={(e) => this.setState({ rewind: parseInt(e.target.value) })}/>
-                <button disabled={!this.state.rewind} onClick={this.rewindSong.bind(this)}>{"<<"}</button>
-                <input type='text' placeholder='FastForward Seconds' onChange={(e) => this.setState({ fastforward: parseInt(e.target.value) })}/>
-                <button disabled={!this.state.fastforward} onClick={this.fastforwardSong.bind(this)}>{">>"}</button>
+                <p>
+                    <button onClick={this.playSong.bind(this)}>Play</button>
+                    <button onClick={this.pauseSong.bind(this)}>Pause</button>
+                    <button onClick={this.stopSong.bind(this)}>Stop</button>
+                </p>
+                <p>
+                    <input
+                        type='text' placeholder='Rewind Seconds'
+                        onChange={(e) => this.setState({ rewind: parseFloat(e.target.value) })}
+                    />
+                    <button disabled={!this.state.rewind} onClick={this.rewindSong.bind(this)}>{"<<"}</button>
+                    <button disabled={!this.state.fastforward} onClick={this.fastforwardSong.bind(this)}>{">>"}</button>
+                    <input
+                        type='text' placeholder='FastForward Seconds'
+                        onChange={(e) => this.setState({ fastforward: parseFloat(e.target.value) })}
+                    />
+                </p>
+                <p>
+                    <input
+                        type='text' placeholder='Playback Rate'
+                        onChange={(e) => this.setState({ speed: parseFloat(e.target.value) })}
+                    />
+                    <button
+                        disabled={(!this.state.speed || this.state.speed < 0.5 || this.state.speed > 4)}
+                        onClick={this.playbackRate.bind(this)}
+                    >
+                        Playback Rate
+                    </button>
+                </p>
             </div>
         );
     }

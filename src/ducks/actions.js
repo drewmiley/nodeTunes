@@ -8,7 +8,7 @@ export const mapDispatchToProps = dispatch => {
 function itemsFetchData(params) {
     return dispatch => {
         dispatch(itemsIsLoading(true));
-        let url = `http://localhost:8000/api/songs/title/${ params.title }?sortBy=title`;
+        let url = `http://localhost:8000/api/songs/title/${ params.title }?sortBy=${ params.sortBy }`;
         if (params.artist) {
             url += `&artist=${ params.artist }`;
         }

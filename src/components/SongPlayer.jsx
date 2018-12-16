@@ -6,7 +6,8 @@ export default class SongPlayer extends Component {
     constructor(props) {
         super(props);
         const song = new Howl({
-          src: [props.song.location]
+          src: [props.song.location],
+          html5: true
         });
         this.state = { song };
     }

@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-const port = process.env.PORT || 8000;
+const port = 8000;
 
 const fs = require("fs");
 const itunes = require("itunes-data");

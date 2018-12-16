@@ -25,10 +25,10 @@ export function items(state = [], action) {
     }
 }
 
-export function songId(state = null, action) {
+export function songPlayingId(state = null, action) {
     switch (action.type) {
-        case 'SET_SONG_ID':
-            return action.songId;
+        case 'SET_SONG_PLAYING_ID':
+            return action.songPlayingId;
         default:
             return state;
     }

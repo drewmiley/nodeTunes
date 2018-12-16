@@ -15,8 +15,8 @@ class App extends Component {
                 items={this.props.items}
                 hasErrored={this.props.hasErrored}
                 isLoading={this.props.isLoading}
-                songId={this.props.songId}
-                setSongId={this.props.setSongId}
+                songPlayingId={this.props.songPlayingId}
+                setSongPlayingId={this.props.setSongPlayingId}
             />
         </div>
     }

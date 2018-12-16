@@ -11,7 +11,7 @@ export default class SongPlayer extends Component {
     playSong() {
         if (this.state.id) {
             this.state.song.play(this.state.id);
-            this.props.setSongId(this.state.id);
+            this.props.setSongPlayingId(this.state.id);
         } else {
             const song = new Howl({
               src: [this.state.location],
@@ -19,7 +19,7 @@ export default class SongPlayer extends Component {
             });
             const id = song.play(this.state.id);
             this.setState({ id, song });
-            this.props.setSongId(id);
+            this.props.setSongPlayingId(id);
         }
         this.setState({ playing: true, paused: false });
 
@@ -50,6 +50,7 @@ export default class SongPlayer extends Component {
     }
 
     render() {
+        console.log(this.props.songPlayingId);
         return (
             <div>
                 <p>

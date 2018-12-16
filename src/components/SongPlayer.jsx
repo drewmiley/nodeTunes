@@ -5,7 +5,11 @@ import { Howl, Howler } from 'howler';
 export default class SongPlayer extends Component {
     constructor(props) {
         super(props);
-        this.state = { location: props.song.location, playing: false, paused: false };
+        const song = new Howl({
+          src: [props.song.location],
+          html5: true
+        });
+        this.state = { song, playing: false, paused: false };
     }
 
     componentDidUpdate() {
@@ -15,20 +19,9 @@ export default class SongPlayer extends Component {
     }
 
     playSong() {
-        if (this.state.id) {
-            this.state.song.play(this.state.id);
-            this.props.setSongPlayingId(this.state.id);
-        } else {
-            const song = new Howl({
-              src: [this.state.location],
-              html5: true
-            });
-            const id = song.play(this.state.id);
-            this.setState({ id, song });
-            this.props.setSongPlayingId(id);
-        }
-        this.setState({ playing: true, paused: false });
-
+        const id = this.state.song.play(this.state.id);
+        this.props.setSongPlayingId(id);
+        this.setState({ id, playing: true, paused: false });
     }
 
     pauseSong() {

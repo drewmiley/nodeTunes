@@ -5,16 +5,20 @@ import { Howl, Howler } from 'howler';
 export default class SongPlayer extends Component {
     constructor(props) {
         super(props);
-        const song = new Howl({
-          src: [props.song.location],
-          html5: true
-        });
-        this.state = { song };
+        this.state = { location: props.song.location };
     }
 
     playSong() {
-        const id = this.state.song.play(this.state.id);
-        this.setState({ id });
+        if (this.state.id) {
+            this.state.song.play(this.state.id)
+        } else {
+            const song = new Howl({
+              src: [this.state.location],
+              html5: true
+            });
+            const id = song.play(this.state.id);
+            this.setState({ id, song });
+        }
     }
 
     pauseSong() {

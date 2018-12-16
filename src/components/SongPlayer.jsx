@@ -27,12 +27,12 @@ export default class SongPlayer extends Component {
 
     rewindSong() {
         const seconds = this.state.song.seek();
-        this.state.song.seek(seconds - this.state.rewind, this.state.id);
+        this.state.song.seek(Math.max(0, seconds - this.state.rewind), this.state.id);
     }
 
     fastforwardSong() {
         const seconds = this.state.song.seek();
-        this.state.song.seek(seconds + this.state.fastforward, this.state.id);
+        this.state.song.seek(Math.min(seconds + this.state.fastforward, this.state.song.duration()), this.state.id);
     }
 
     playbackRate() {

@@ -10,7 +10,7 @@ export default class SongPlayer extends Component {
 
     playSong() {
         if (this.state.id) {
-            this.state.song.play(this.state.id)
+            this.state.song.play(this.state.id);
         } else {
             const song = new Howl({
               src: [this.state.location],

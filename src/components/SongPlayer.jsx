@@ -5,12 +5,14 @@ import { Howl, Howler } from 'howler';
 export default class SongPlayer extends Component {
     constructor(props) {
         super(props);
+        console.log(props);
         this.state = { location: props.song.location, playing: false, paused: false };
     }
 
     playSong() {
         if (this.state.id) {
             this.state.song.play(this.state.id);
+            this.props.setSongId(this.state.id);
         } else {
             const song = new Howl({
               src: [this.state.location],
@@ -18,8 +20,10 @@ export default class SongPlayer extends Component {
             });
             const id = song.play(this.state.id);
             this.setState({ id, song });
+            this.props.setSongId(id);
         }
         this.setState({ playing: true, paused: false });
+
     }
 
     pauseSong() {

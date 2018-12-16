@@ -1,5 +1,8 @@
 export const mapDispatchToProps = dispatch => {
-    return { fetchData: url => dispatch(itemsFetchData(url)) };
+    return {
+        fetchData: url => dispatch(itemsFetchData(url)),
+        setSongId: songId => dispatch(setSongId(songId))
+    };
 };
 
 function itemsFetchData(params) {
@@ -49,4 +52,11 @@ function itemsFetchDataSuccess(items) {
         type: 'ITEMS_FETCH_DATA_SUCCESS',
         items
     };
+}
+
+function setSongId(songId) {
+    return dispatch => {dispatch({
+        type: 'SET_SONG_ID',
+        songId
+    })};
 }

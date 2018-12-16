@@ -7,6 +7,7 @@ import { mapDispatchToProps } from './ducks/actions';
 
 class App extends Component {
     render() {
+        console.log(this.props);
         return <div>
             <SongSearch
                 fetchData={this.props.fetchData}
@@ -15,6 +16,8 @@ class App extends Component {
                 items={this.props.items}
                 hasErrored={this.props.hasErrored}
                 isLoading={this.props.isLoading}
+                songId={this.props.songId}
+                setSongId={this.props.setSongId}
             />
         </div>
     }

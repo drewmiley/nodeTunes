@@ -5,7 +5,7 @@ import { Howl, Howler } from 'howler';
 export default class SongPlayer extends Component {
     constructor(props) {
         super(props);
-        this.state = { location: props.song.location };
+        this.state = { location: props.song.location, playing: false, paused: false };
     }
 
     playSong() {
@@ -19,14 +19,17 @@ export default class SongPlayer extends Component {
             const id = song.play(this.state.id);
             this.setState({ id, song });
         }
+        this.setState({ playing: true, paused: false });
     }
 
     pauseSong() {
         this.state.song.pause(this.state.id);
+        this.setState({ playing: false, paused: true });
     }
 
     stopSong() {
         this.state.song.stop(this.state.id);
+        this.setState({ playing: false, paused: false });
     }
 
     rewindSong() {
@@ -47,8 +50,18 @@ export default class SongPlayer extends Component {
         return (
             <div>
                 <p>
-                    <button onClick={this.playSong.bind(this)}>Play</button>
-                    <button onClick={this.pauseSong.bind(this)}>Pause</button>
+                    <button
+                        className={this.state.playing ? 'active-button': ''}
+                        onClick={this.playSong.bind(this)}
+                    >
+                        Play
+                    </button>
+                    <button
+                        className={this.state.paused ? 'active-button': ''}
+                        onClick={this.pauseSong.bind(this)}
+                    >
+                        Pause
+                    </button>
                     <button onClick={this.stopSong.bind(this)}>Stop</button>
                 </p>
                 <p>

@@ -8,6 +8,12 @@ export default class SongPlayer extends Component {
         this.state = { location: props.song.location, playing: false, paused: false };
     }
 
+    componentDidUpdate() {
+        if (this.props.songPlayingId !== this.state.id && this.state.playing) {
+            this.pauseSong();
+        }
+    }
+
     playSong() {
         if (this.state.id) {
             this.state.song.play(this.state.id);
@@ -50,7 +56,6 @@ export default class SongPlayer extends Component {
     }
 
     render() {
-        console.log(this.props.songPlayingId);
         return (
             <div>
                 <p>

@@ -1,33 +1,25 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 import SongPlayer from './SongPlayer';
 
-export default class SongList extends Component {
-    render() {
-        if (this.props.hasErrored) {
-            return <p>Sorry! There was an error loading the items</p>;
-        }
-
-        if (this.props.isLoading) {
-            return <p>Loading…</p>;
-        }
-
-        return (
-            <div>
-                {this.props.items.map((item, i) => (
-                    <div key={i} className='songContainer'>
-                        <div>
-                            <p>{item.title} - {item.artist} - {item.album}</p>
-                            <SongPlayer
-                                onlyAllowOneSongToPlay={true}
-                                song={item}
-                                songPlayingId={this.props.songPlayingId}
-                                setSongPlayingId={this.props.setSongPlayingId}
-                            />
-                        </div>
+const SongList = props => {
+    return (
+        <div>
+            {props.items.map((item, i) => (
+                <div key={i} className='songContainer'>
+                    <div>
+                        <p>{item.title} - {item.artist} - {item.album}</p>
+                        <SongPlayer
+                            onlyAllowOneSongToPlay={true}
+                            song={item}
+                            songPlayingId={props.songPlayingId}
+                            setSongPlayingId={props.setSongPlayingId}
+                        />
                     </div>
-                ))}
-            </div>
-        );
-    }
+                </div>
+            ))}
+        </div>
+    );
 }
+
+export default SongList;

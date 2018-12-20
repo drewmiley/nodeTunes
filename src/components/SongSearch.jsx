@@ -1,34 +1,30 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react'
 
-export default class SongSearch extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            artist: null,
-            album: null,
-            sortBy: 'title',
-            title: null
-        };
-    }
+const SongSearch = props => {
+    const [artist, setArtist] = useState(null);
+    const [album, setAlbum] = useState(null);
+    const [sortBy, setSortBy] = useState('title');
+    const [title, setTitle] = useState(null);
 
-    fetchData() {
-        this.props.fetchData(this.state);
-    }
-
-    render() {
-        return (
-            <div>
-                <input type='text' placeholder='Artist' onChange={(e) => this.setState({ artist: e.target.value })}/>
-                <input type='text' placeholder='Album' onChange={(e) => this.setState({ album: e.target.value })}/>
-                <input type='text' placeholder='Title' onChange={(e) => this.setState({ title: e.target.value })}/>
-                <select defaultValue={this.state.sortBy} onChange={(e) => this.setState({ sortBy: e.target.value })}>
-                    <option value="album">Album</option>
-                    <option value="artist">Artist</option>
-                    <option value="length">Length</option>
-                    <option value="title">Title</option>
-                </select>
-                <button onClick={() => this.fetchData()}>Fetch Songs</button>
-            </div>
-        );
-    }
+    return (
+        <div>
+            <input type='text' placeholder='Artist' onChange={(e) => setArtist(e.target.value)}/>
+            <input type='text' placeholder='Album' onChange={(e) => setAlbum(e.target.value)}/>
+            <input type='text' placeholder='Title' onChange={(e) => setTitle(e.target.value)}/>
+            <select defaultValue={sortBy} onChange={(e) => setSortBy(e.target.value)}>
+                <option value="album">Album</option>
+                <option value="artist">Artist</option>
+                <option value="length">Length</option>
+                <option value="title">Title</option>
+            </select>
+            <button onClick={() => props.fetchData({
+                artist,
+                album,
+                sortBy,
+                title
+            })}>Fetch Songs</button>
+        </div>
+    );
 }
+
+export default SongSearch;

@@ -7,7 +7,6 @@ export const mapDispatchToProps = dispatch => {
 
 function itemsFetchData(params) {
     return dispatch => {
-        dispatch(itemsIsLoading(true));
         let url = `http://localhost:8000/api/songs/title/${ params.title }?sortBy=${ params.sortBy }`;
         if (params.artist) {
             url += `&artist=${ params.artist }`;
@@ -22,28 +21,11 @@ function itemsFetchData(params) {
                     throw Error(response.statusText);
                 }
 
-                dispatch(itemsIsLoading(false));
-
                 return response;
             })
             .then(response => response.json())
             .then(response => response.results)
-            .then(items => dispatch(itemsFetchDataSuccess(items)))
-            .catch(() => dispatch(itemsHasErrored(true)));
-    };
-}
-
-function itemsHasErrored(bool) {
-    return {
-        type: 'ITEMS_HAS_ERRORED',
-        hasErrored: bool
-    };
-}
-
-function itemsIsLoading(bool) {
-    return {
-        type: 'ITEMS_IS_LOADING',
-        isLoading: bool
+            .then(items => dispatch(itemsFetchDataSuccess(items)));
     };
 }
 

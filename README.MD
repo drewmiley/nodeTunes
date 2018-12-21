@@ -1,6 +1,6 @@
 # nodeTunes
 
-Backend serving iTunes data, frontend plays music. Uses node, react, howl.
+Backend serving iTunes data, frontend plays music. Uses node, react, howl. Now written with React Hooks!!!
 
 ## To run
 

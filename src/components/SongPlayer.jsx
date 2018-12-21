@@ -1,96 +1,127 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { Howl, Howler } from 'howler';
 
-export default class SongPlayer extends Component {
-    constructor(props) {
-        super(props);
-        this.state = { playing: false, paused: false };
-    }
+function useSongPlayerState(props) {
+    const [id, setId] = useState(null);
+    const [song, setSong] = useState(null);
+    const [playing, setPlaying] = useState(false);
+    const [paused, setPaused] = useState(false);
+    const [fastforward, setFastforward] = useState(null);
+    const [rewind, setRewind] = useState(null);
+    const [speed, setSpeed] = useState(null);
 
-    componentDidUpdate() {
-        if (this.props.onlyAllowOneSongToPlay && this.props.songPlayingId !== this.state.id && this.state.playing) {
-            this.pauseSong();
-        }
-    }
-
-    playSong() {
-        const song = this.state.song || new Howl({
-            src: [this.props.song.location],
+    const playSong = () => {
+        const songValue = song || new Howl({
+            src: [props.song.location],
             html5: true
         });
-        const id = song.play(this.state.id);
-        this.props.setSongPlayingId(id);
-        this.setState({ id, song, playing: true, paused: false });
+        const idValue = songValue.play(id);
+        props.setSongPlayingId(idValue);
+        setId(idValue);
+        setSong(songValue);
+        setPlaying(true);
+        setPaused(false);
     }
 
-    pauseSong() {
-        this.state.song.pause(this.state.id);
-        this.setState({ playing: false, paused: true });
+    const pauseSong = () => {
+        song.pause(id);
+        setPlaying(false);
+        setPaused(true);
     }
 
-    stopSong() {
-        this.state.song.stop(this.state.id);
-        this.setState({ playing: false, paused: false });
+    const stopSong = () => {
+        song.stop(id);
+        setPlaying(false);
+        setPaused(false);
     }
 
-    rewindSong() {
-        const seconds = this.state.song.seek();
-        this.state.song.seek(Math.max(0, seconds - this.state.rewind), this.state.id);
+    const rewindSong = () => {
+        const seconds = song.seek();
+        song.seek(Math.max(0, seconds - rewind), id);
     }
 
-    fastforwardSong() {
-        const seconds = this.state.song.seek();
-        this.state.song.seek(Math.min(seconds + this.state.fastforward, this.state.song.duration()), this.state.id);
+    const fastforwardSong = () => {
+        const seconds = song.seek();
+        song.seek(Math.min(seconds + fastforward, song.duration()), id);
     }
 
-    playbackRate() {
-        this.state.song.rate(this.state.speed, this.state.id);
+    const playbackRate = () => {
+        song.rate(speed, id);
     }
 
-    render() {
-        return (
-            <div>
-                <p>
-                    <button
-                        className={this.state.playing ? 'active-button': ''}
-                        onClick={this.playSong.bind(this)}
-                    >
-                        Play
-                    </button>
-                    <button
-                        className={this.state.paused ? 'active-button': ''}
-                        onClick={this.pauseSong.bind(this)}
-                    >
-                        Pause
-                    </button>
-                    <button onClick={this.stopSong.bind(this)}>Stop</button>
-                </p>
-                <p>
-                    <input
-                        type='text' placeholder='Rewind Seconds'
-                        onChange={(e) => this.setState({ rewind: parseFloat(e.target.value) })}
-                    />
-                    <button disabled={!this.state.rewind} onClick={this.rewindSong.bind(this)}>{"<<"}</button>
-                    <button disabled={!this.state.fastforward} onClick={this.fastforwardSong.bind(this)}>{">>"}</button>
-                    <input
-                        type='text' placeholder='FastForward Seconds'
-                        onChange={(e) => this.setState({ fastforward: parseFloat(e.target.value) })}
-                    />
-                </p>
-                <p>
-                    <input
-                        type='text' placeholder='Playback Rate'
-                        onChange={(e) => this.setState({ speed: parseFloat(e.target.value) })}
-                    />
-                    <button
-                        disabled={(!this.state.speed || this.state.speed < 0.5 || this.state.speed > 4)}
-                        onClick={this.playbackRate.bind(this)}
-                    >
-                        Playback Rate
-                    </button>
-                </p>
-            </div>
-        );
+    return {
+        id,
+        song,
+        playing,
+        paused,
+        fastforward,
+        setFastforward,
+        rewind,
+        setRewind,
+        speed,
+        setSpeed,
+        playSong,
+        pauseSong,
+        stopSong,
+        rewindSong,
+        fastforwardSong,
+        playbackRate
     }
 }
+
+const SongPlayer = props => {
+    const state = useSongPlayerState(props);
+
+    useEffect(() => {
+        if (props.onlyAllowOneSongToPlay && props.songPlayingId !== state.id && state.playing) {
+            state.pauseSong();
+        }
+    })
+
+    return (
+        <div>
+            <p>
+                <button
+                    className={state.playing ? 'active-button': ''}
+                    onClick={state.playSong}
+                >
+                    Play
+                </button>
+                <button
+                    className={state.paused ? 'active-button': ''}
+                    onClick={state.pauseSong}
+                >
+                    Pause
+                </button>
+                <button onClick={state.stopSong}>Stop</button>
+            </p>
+            <p>
+                <input
+                    type='text' placeholder='Rewind Seconds'
+                    onChange={(e) => state.setRewind(parseFloat(e.target.value))}
+                />
+                <button disabled={!state.rewind} onClick={state.rewindSong}>{"<<"}</button>
+                <button disabled={!state.fastforward} onClick={state.fastforwardSong}>{">>"}</button>
+                <input
+                    type='text' placeholder='FastForward Seconds'
+                    onChange={(e) => state.setFastforward(parseFloat(e.target.value))}
+                />
+            </p>
+            <p>
+                <input
+                    type='text' placeholder='Playback Rate'
+                    onChange={(e) => state.setSpeed(parseFloat(e.target.value))}
+                />
+                <button
+                    disabled={(!state.speed || state.speed < 0.5 || state.speed > 4)}
+                    onClick={state.playbackRate}
+                >
+                    Playback Rate
+                </button>
+            </p>
+        </div>
+    )
+}
+
+export default SongPlayer;

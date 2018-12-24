@@ -67,19 +67,35 @@ const SongPlayer = props => {
                 </button>
                 <button
                     className={paused ? 'active-button': ''}
+                    disabled={!song}
                     onClick={pauseSong}
                 >
                     Pause
                 </button>
-                <button onClick={stopSong}>Stop</button>
+                <button
+                    disabled={!song}
+                    onClick={stopSong}
+                >
+                    Stop
+                </button>
             </p>
             <p>
                 <input
                     type='text' placeholder='Rewind Seconds'
                     onChange={(e) => setRewind(parseFloat(e.target.value))}
                 />
-                <button disabled={!rewind} onClick={rewindSong}>{"<<"}</button>
-                <button disabled={!fastforward} onClick={fastforwardSong}>{">>"}</button>
+                <button
+                    disabled={!song || !rewind}
+                    onClick={rewindSong}
+                >
+                    {"<<"}
+                </button>
+                <button
+                    disabled={!song || !fastforward}
+                    onClick={fastforwardSong}
+                >
+                    {">>"}
+                </button>
                 <input
                     type='text' placeholder='FastForward Seconds'
                     onChange={(e) => setFastforward(parseFloat(e.target.value))}
@@ -91,7 +107,7 @@ const SongPlayer = props => {
                     onChange={(e) => setSpeed(parseFloat(e.target.value))}
                 />
                 <button
-                    disabled={(!speed || speed < 0.5 || speed > 4)}
+                    disabled={(!song || !speed || speed < 0.5 || speed > 4)}
                     onClick={playbackRate}
                 >
                     Playback Rate

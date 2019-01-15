@@ -15,6 +15,22 @@ const PlaylistPlayer = props => {
         });
         const idValue = playlistValue.play(id);
         props.setPlaylistSongPlayingIndex(0);
+        startPlaying(idValue, playlistValue);
+    }
+
+    const navigatePlaylist = (indexChange) => {
+        playlist.stop(id);
+        const playIndex = props.songs.map(playlist => playlist.location).indexOf(playlist._src) + indexChange;
+        const playlistValue = new Howl({
+            src: props.songs.filter((_, i) => i >= playIndex).map(playlist => playlist.location),
+            html5: true
+        });
+        props.setPlaylistSongPlayingIndex(playIndex);
+        const idValue = playlistValue.play(null);
+        startPlaying(idValue, playlistValue);
+    }
+
+    const startPlaying = (idValue, playlistValue) => {
         props.setSongPlayingId(idValue);
         setId(idValue);
         setPlaylist(playlistValue);
@@ -35,54 +51,6 @@ const PlaylistPlayer = props => {
         setPlaylist(null);
         setId(null);
         props.setPlaylistSongPlayingIndex(null);
-    }
-
-    const nextSong = () => {
-        playlist.stop(id);
-        const index = props.songs.map(playlist => playlist.location).indexOf(playlist._src);
-        const playlistValue = new Howl({
-            src: props.songs.filter((_, i) => i >= index + 1).map(playlist => playlist.location),
-            html5: true
-        });
-        props.setPlaylistSongPlayingIndex(index + 1);
-        const idValue = playlistValue.play(null);
-        props.setSongPlayingId(idValue);
-        setId(idValue);
-        setPlaylist(playlistValue);
-        setPlaying(true);
-        setPaused(false);
-    }
-
-    const restartSong = () => {
-        playlist.stop(id);
-        const index = props.songs.map(playlist => playlist.location).indexOf(playlist._src);
-        const playlistValue = new Howl({
-            src: props.songs.filter((_, i) => i >= index).map(playlist => playlist.location),
-            html5: true
-        });
-        props.setPlaylistSongPlayingIndex(index);
-        const idValue = playlistValue.play(null);
-        props.setSongPlayingId(idValue);
-        setId(idValue);
-        setPlaylist(playlistValue);
-        setPlaying(true);
-        setPaused(false);
-    }
-
-    const previousSong = () => {
-        playlist.stop(id);
-        const index = props.songs.map(playlist => playlist.location).indexOf(playlist._src);
-        const playlistValue = new Howl({
-            src: props.songs.filter((_, i) => i >= index - 1).map(playlist => playlist.location),
-            html5: true
-        });
-        props.setPlaylistSongPlayingIndex(index - 1);
-        const idValue = playlistValue.play(null);
-        props.setSongPlayingId(idValue);
-        setId(idValue);
-        setPlaylist(playlistValue);
-        setPlaying(true);
-        setPaused(false);
     }
 
     useEffect(() => {
@@ -123,19 +91,19 @@ const PlaylistPlayer = props => {
           <p>
               <button
                   disabled={!playlist || props.playlistSongPlayingIndex === props.songs.length - 1}
-                  onClick={nextSong}
+                  onClick={() => navigatePlaylist(1)}
               >
                   Next Song
               </button>
               <button
                   disabled={!playlist}
-                  onClick={restartSong}
+                  onClick={() => navigatePlaylist(0)}
               >
                   Restart Song
               </button>
               <button
                   disabled={!playlist || props.playlistSongPlayingIndex === 0}
-                  onClick={previousSong}
+                  onClick={() => navigatePlaylist(-1)}
               >
                   Previous Song
               </button>

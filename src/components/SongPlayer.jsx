@@ -54,7 +54,7 @@ const SongPlayer = props => {
         if (props.onlyAllowOneSongToPlay && props.songPlayingId !== id && playing) {
             pauseSong();
         }
-    })
+    }, [props.songPlayingId])
 
     return (
         <div>

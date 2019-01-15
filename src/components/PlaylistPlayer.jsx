@@ -28,15 +28,13 @@ const PlaylistPlayer = props => {
         setPaused(true);
     }
 
-    const stopPlaylist = (clearPlaylist = false) => {
+    const stopPlaylist = () => {
         playlist.stop(id);
         setPlaying(false);
         setPaused(false);
-        if (clearPlaylist) {
-            setPlaylist(null);
-            setId(null);
-            props.setPlaylistSongPlayingIndex(null);
-        }
+        setPlaylist(null);
+        setId(null);
+        props.setPlaylistSongPlayingIndex(null);
     }
 
     const nextSong = () => {
@@ -92,10 +90,12 @@ const PlaylistPlayer = props => {
             pausePlaylist();
         }
         // TODO: Remove song from playlist needs to be considered better here
-        if (playlist && playlist._src !== props.songs[props.playlistSongPlayingIndex].location) {
-            stopPlaylist(true);
+        if (playlist && (!props.songs.length || playlist._src !== props.songs[props.playlistSongPlayingIndex].location)) {
+            stopPlaylist();
         }
     })
+
+    // check on props.songs.length potentially?
 
     return (
       <div>

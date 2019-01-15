@@ -10,6 +10,7 @@ const Playlist = props => {
                 songs={props.songs}
                 songPlayingId={props.songPlayingId}
                 setSongPlayingId={props.setSongPlayingId}
+                playlistSongPlayingIndex={props.playlistSongPlayingIndex}
                 setPlaylistSongPlayingIndex={props.setPlaylistSongPlayingIndex}
             />
             {props.songs.map((song, i) => (

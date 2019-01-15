@@ -35,8 +35,9 @@ const PlaylistPlayer = props => {
 
     const nextSong = () => {
         playlist.stop(id);
+        const index = props.songs.map(playlist => playlist.location).indexOf(playlist._src);
         const playlistValue = new Howl({
-            src: props.songs.map(playlist => playlist.location),
+            src: props.songs.filter((_, i) => i >= index + 1).map(playlist => playlist.location),
             html5: true
         });
         const idValue = playlistValue.play(null);
@@ -49,8 +50,9 @@ const PlaylistPlayer = props => {
 
     const restartSong = () => {
         playlist.stop(id);
+        const index = props.songs.map(playlist => playlist.location).indexOf(playlist._src);
         const playlistValue = new Howl({
-            src: props.songs.map(playlist => playlist.location),
+            src: props.songs.filter((_, i) => i >= index).map(playlist => playlist.location),
             html5: true
         });
         const idValue = playlistValue.play(null);
@@ -63,8 +65,9 @@ const PlaylistPlayer = props => {
 
     const previousSong = () => {
         playlist.stop(id);
+        const index = props.songs.map(playlist => playlist.location).indexOf(playlist._src);
         const playlistValue = new Howl({
-            src: props.songs.map(playlist => playlist.location),
+            src: props.songs.filter((_, i) => i >= index - 1).map(playlist => playlist.location),
             html5: true
         });
         const idValue = playlistValue.play(null);

@@ -10,9 +10,10 @@ const Playlist = props => {
                 songs={props.songs}
                 songPlayingId={props.songPlayingId}
                 setSongPlayingId={props.setSongPlayingId}
+                setPlaylistSongPlayingIndex={props.setPlaylistSongPlayingIndex}
             />
             {props.songs.map((song, i) => (
-                <div key={i} className='songContainer'>
+                <div key={i} className={`songContainer ${ i === props.playlistSongPlayingIndex ? 'playlistSongPlaying' : '' }`}>
                     <p>{song.title} - {song.artist} - {song.album}</p>
                     <button onClick={() => props.removeSongFromPlaylist(song)}>Remove Song From Playlist</button>
                 </div>

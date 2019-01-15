@@ -14,6 +14,7 @@ const PlaylistPlayer = props => {
             html5: true
         });
         const idValue = playlistValue.play(id);
+        props.setPlaylistSongPlayingIndex(0);
         props.setSongPlayingId(idValue);
         setId(idValue);
         setPlaylist(playlistValue);
@@ -40,6 +41,7 @@ const PlaylistPlayer = props => {
             src: props.songs.filter((_, i) => i >= index + 1).map(playlist => playlist.location),
             html5: true
         });
+        props.setPlaylistSongPlayingIndex(index + 1);
         const idValue = playlistValue.play(null);
         props.setSongPlayingId(idValue);
         setId(idValue);
@@ -55,6 +57,7 @@ const PlaylistPlayer = props => {
             src: props.songs.filter((_, i) => i >= index).map(playlist => playlist.location),
             html5: true
         });
+        props.setPlaylistSongPlayingIndex(index);
         const idValue = playlistValue.play(null);
         props.setSongPlayingId(idValue);
         setId(idValue);
@@ -70,6 +73,7 @@ const PlaylistPlayer = props => {
             src: props.songs.filter((_, i) => i >= index - 1).map(playlist => playlist.location),
             html5: true
         });
+        props.setPlaylistSongPlayingIndex(index - 1);
         const idValue = playlistValue.play(null);
         props.setSongPlayingId(idValue);
         setId(idValue);

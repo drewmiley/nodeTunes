@@ -26,3 +26,12 @@ export function songPlayingId(state = null, action) {
             return state;
     }
 }
+
+export function playlistSongPlayingIndex(state = null, action) {
+    switch (action.type) {
+        case 'SET_PLAYLIST_SONG_PLAYING_INDEX':
+            return action.index;
+        default:
+            return state;
+    }
+}

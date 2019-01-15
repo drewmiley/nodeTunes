@@ -1,10 +1,4 @@
-export const mapDispatchToProps = dispatch => ({
-    fetchData: url => dispatch(songsFetchData(url)),
-    setSongPlayingId: songPlayingId => dispatch(setSongPlayingId(songPlayingId)),
-    addSongToPlaylist: song => dispatch(addSongToPlaylist(song)),
-    removeSongFromPlaylist: song => dispatch(removeSongFromPlaylist(song)),
-    setPlaylistSongPlayingIndex: i => dispatch(setPlaylistSongPlayingIndex(i))
-});
+import * as actiontypes from './actiontypes';
 
 const songsFetchData = params => dispatch => {
     let url = `http://localhost:8000/api/songs/title/${ params.title }?sortBy=${ params.sortBy }`;
@@ -29,13 +23,21 @@ const songsFetchData = params => dispatch => {
 };
 
 const songsFetchDataSuccess = songs => ({
-    type: 'SONGS_FETCH_DATA_SUCCESS',
+    type: actiontypes.SONGS_FETCH_DATA_SUCCESS,
     songs
 });
 
-const setSongPlayingId = songPlayingId => dispatch => dispatch({ type: 'SET_SONG_PLAYING_ID', songPlayingId });
+const setSongPlayingId = songPlayingId => dispatch => dispatch({ type: actiontypes.SET_SONG_PLAYING_ID, songPlayingId });
 
-const addSongToPlaylist = song => dispatch => dispatch({ type: 'ADD_SONG_TO_PLAYLIST', song });
-const removeSongFromPlaylist = song => dispatch => dispatch({ type: 'REMOVE_SONG_FROM_PLAYLIST', song });
+const addSongToPlaylist = song => dispatch => dispatch({ type: actiontypes.ADD_SONG_TO_PLAYLIST, song });
+const removeSongFromPlaylist = song => dispatch => dispatch({ type: actiontypes.REMOVE_SONG_FROM_PLAYLIST, song });
 
-const setPlaylistSongPlayingIndex = index => dispatch => dispatch({type: 'SET_PLAYLIST_SONG_PLAYING_INDEX', index});
+const setPlaylistSongPlayingIndex = index => dispatch => dispatch({type: actiontypes.SET_PLAYLIST_SONG_PLAYING_INDEX, index});
+
+export const mapDispatchToProps = dispatch => ({
+    fetchData: url => dispatch(songsFetchData(url)),
+    setSongPlayingId: songPlayingId => dispatch(setSongPlayingId(songPlayingId)),
+    addSongToPlaylist: song => dispatch(addSongToPlaylist(song)),
+    removeSongFromPlaylist: song => dispatch(removeSongFromPlaylist(song)),
+    setPlaylistSongPlayingIndex: i => dispatch(setPlaylistSongPlayingIndex(i))
+});

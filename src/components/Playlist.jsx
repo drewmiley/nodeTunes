@@ -1,6 +1,7 @@
 import React from 'react';
 
 import PlaylistPlayer from './PlaylistPlayer';
+import SongInfo from './SongInfo';
 
 const Playlist = props => {
     return (
@@ -15,7 +16,7 @@ const Playlist = props => {
             />
             {props.songs.map((song, i) => (
                 <div key={i} className={`songContainer ${ i === props.playlistSongPlayingIndex ? 'playlistSongPlaying' : '' }`}>
-                    <p>{song.title} - {song.artist} - {song.album}</p>
+                    <SongInfo song={song} />
                     <button onClick={() => props.removeSongFromPlaylist(song)}>Remove Song From Playlist</button>
                 </div>
             ))}

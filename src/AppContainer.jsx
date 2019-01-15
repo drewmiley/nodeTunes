@@ -20,7 +20,7 @@ class App extends Component {
                     addSongToPlaylist={this.props.addSongToPlaylist}
                 />
             </div>
-            <div className='half-width'>
+            <div className={`half-width ${ this.props.playlistSongs.length === 0 ? 'emptyPlaylist' : '' }`}>
                 <Playlist
                     songs={this.props.playlistSongs}
                     songPlayingId={this.props.songPlayingId}

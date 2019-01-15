@@ -1,5 +1,6 @@
 import React from 'react';
 
+import SongInfo from './SongInfo';
 import SongPlayer from './SongPlayer';
 
 const SongList = props => {
@@ -7,7 +8,7 @@ const SongList = props => {
         <>
             {props.songs.map((song, i) => (
                 <div key={i} className='songContainer'>
-                    <p>{song.title} - {song.artist} - {song.album}</p>
+                    <SongInfo song={song} />
                     <button onClick={() => props.addSongToPlaylist(song)}>Add Song To Playlist</button>
                     <SongPlayer
                         onlyAllowOneSongToPlay={true}

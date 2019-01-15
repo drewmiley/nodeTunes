@@ -9,28 +9,29 @@ const PlaylistPlayer = props => {
     const [paused, setPaused] = useState(false);
 
     const playPlaylist = () => {
+        const initialIndex = 0;
         const playlistValue = playlist || new Howl({
-            src: props.songs.map(playlist => playlist.location),
+            src: [props.songs[initialIndex].location],
             html5: true
         });
         const idValue = playlistValue.play(id);
-        props.setPlaylistSongPlayingIndex(0);
-        startPlaying(idValue, playlistValue);
+        props.setPlaylistSongPlayingIndex(initialIndex);
+        startPlaying(idValue, playlistValue, initialIndex);
     }
 
     const navigatePlaylist = (indexChange) => {
         playlist.stop(id);
         const playIndex = props.songs.map(playlist => playlist.location).indexOf(playlist._src) + indexChange;
         const playlistValue = new Howl({
-            src: props.songs.filter((_, i) => i >= playIndex).map(playlist => playlist.location),
+            src: [props.songs[playIndex].location],
             html5: true
         });
-        props.setPlaylistSongPlayingIndex(playIndex);
         const idValue = playlistValue.play(null);
-        startPlaying(idValue, playlistValue);
+        startPlaying(idValue, playlistValue, playIndex);
     }
 
-    const startPlaying = (idValue, playlistValue) => {
+    const startPlaying = (idValue, playlistValue, index) => {
+        props.setPlaylistSongPlayingIndex(index);
         props.setSongPlayingId(idValue);
         setId(idValue);
         setPlaylist(playlistValue);

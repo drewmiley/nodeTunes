@@ -89,7 +89,7 @@ router.get('/songs/title/:title?', (req, res) => {
     // Allowed query params- sortBy, album, artist
     // SortBy options- album, artist, length, TITLE
     const results = songs
-        .filter(song => req.params.title === 'null' || (song.title && song.title.toUpperCase().includes(req.params.title.toUpperCase())))
+        .filter(song => !req.params.title || req.params.title === 'null' || (song.title && song.title.toUpperCase().includes(req.params.title.toUpperCase())))
         .filter(filterByQueryParams(req.query))
         .sort(sortBy(req.query.sortBy || 'title'));
     res.json({ results });

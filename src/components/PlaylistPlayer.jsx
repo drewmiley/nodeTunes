@@ -28,12 +28,15 @@ const PlaylistPlayer = props => {
         setPaused(true);
     }
 
-    const stopPlaylist = () => {
+    const stopPlaylist = (clearPlaylist = false) => {
         playlist.stop(id);
-        setPlaylist(null);
         setPlaying(false);
         setPaused(false);
-        props.setPlaylistSongPlayingIndex(null);
+        if (clearPlaylist) {
+            setPlaylist(null);
+            setId(null);
+            props.setPlaylistSongPlayingIndex(null);
+        }
     }
 
     const nextSong = () => {
@@ -89,7 +92,7 @@ const PlaylistPlayer = props => {
             pausePlaylist();
         }
         if (playlist && playlist._src !== props.songs[props.playlistSongPlayingIndex].location) {
-            stopPlaylist();
+            stopPlaylist(true);
         }
     })
 

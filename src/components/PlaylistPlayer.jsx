@@ -30,8 +30,10 @@ const PlaylistPlayer = props => {
 
     const stopPlaylist = () => {
         playlist.stop(id);
+        setPlaylist(null);
         setPlaying(false);
         setPaused(false);
+        props.setPlaylistSongPlayingIndex(null);
     }
 
     const nextSong = () => {
@@ -85,6 +87,9 @@ const PlaylistPlayer = props => {
     useEffect(() => {
         if (props.songPlayingId !== id && playing) {
             pausePlaylist();
+        }
+        if (playlist && playlist._src !== props.songs[props.playlistSongPlayingIndex].location) {
+            stopPlaylist();
         }
     })
 

@@ -1,6 +1,7 @@
 export const mapDispatchToProps = dispatch => ({
     fetchData: url => dispatch(songsFetchData(url)),
-    setSongPlayingId: songPlayingId => dispatch(setSongPlayingId(songPlayingId))
+    setSongPlayingId: songPlayingId => dispatch(setSongPlayingId(songPlayingId)),
+    addSongToPlaylist: song => dispatch(addSongToPlaylist(song))
 });
 
 const songsFetchData = params => dispatch => {
@@ -31,3 +32,5 @@ const songsFetchDataSuccess = songs => ({
 });
 
 const setSongPlayingId = songPlayingId => dispatch => dispatch({ type: 'SET_SONG_PLAYING_ID', songPlayingId });
+
+const addSongToPlaylist = song => dispatch => dispatch({ type: 'ADD_SONG_TO_PLAYLIST', song });

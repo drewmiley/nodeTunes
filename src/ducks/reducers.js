@@ -1,3 +1,12 @@
+export function playlistSongs(state = [], action) {
+    switch (action.type) {
+        case 'ADD_SONG_TO_PLAYLIST':
+            return [song];
+        default:
+            return state;
+    }
+}
+
 export function songs(state = [], action) {
     switch (action.type) {
         case 'SONGS_FETCH_DATA_SUCCESS':

@@ -17,11 +17,12 @@ class App extends Component {
                     songs={this.props.songs}
                     songPlayingId={this.props.songPlayingId}
                     setSongPlayingId={this.props.setSongPlayingId}
+                    addSongToPlaylist={this.props.addSongToPlaylist}
                 />
             </div>
             <div className='half-width'>
                 <Playlist
-                    songs={this.props.playlistSongs || []}
+                    songs={this.props.playlistSongs}
                     songPlayingId={this.props.songPlayingId}
                     setSongPlayingId={this.props.setSongPlayingId}
                 />

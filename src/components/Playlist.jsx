@@ -1,9 +1,16 @@
 import React from 'react';
 
+import PlaylistPlayer from './PlaylistPlayer';
+
 const Playlist = props => {
     return (
         <>
             <h1>Playlist</h1>
+            <PlaylistPlayer
+                songs={props.songs}
+                songPlayingId={props.songPlayingId}
+                setSongPlayingId={props.setSongPlayingId}
+            />
             {props.songs.map((song, i) => (
                 <div key={i} className='songContainer'>
                     <p>{song.title} - {song.artist} - {song.album}</p>

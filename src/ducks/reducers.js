@@ -1,9 +1,9 @@
 export function playlistSongs(state = [], action) {
     switch (action.type) {
         case 'ADD_SONG_TO_PLAYLIST':
-            return [action.song];
+            return state.concat([action.song]);
         case 'REMOVE_SONG_FROM_PLAYLIST':
-            return [];
+            return state.filter(song => song !== action.song);
         default:
             return state;
     }

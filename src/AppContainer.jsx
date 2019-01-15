@@ -7,18 +7,23 @@ import { mapDispatchToProps } from './ducks/actions';
 
 class App extends Component {
     render() {
-        return <div>
-            <SongSearch
-                fetchData={this.props.fetchData}
-            />
-            <SongList
-                items={this.props.items}
-                hasErrored={this.props.hasErrored}
-                isLoading={this.props.isLoading}
-                songPlayingId={this.props.songPlayingId}
-                setSongPlayingId={this.props.setSongPlayingId}
-            />
-        </div>
+        return <>
+            <div className='half-width'>
+                <SongSearch
+                    fetchData={this.props.fetchData}
+                />
+                <SongList
+                    items={this.props.items}
+                    hasErrored={this.props.hasErrored}
+                    isLoading={this.props.isLoading}
+                    songPlayingId={this.props.songPlayingId}
+                    setSongPlayingId={this.props.setSongPlayingId}
+                />
+            </div>
+            <div className='half-width'>
+                Playlist
+            </div>
+        </>
     }
 };
 

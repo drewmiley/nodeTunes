@@ -83,8 +83,8 @@ const PlaylistPlayer = props => {
     }
 
     useEffect(() => {
-        if (props.onlyAllowOneSongToPlay && props.playlistPlayingId !== id && playing) {
-            pauseSong();
+        if (props.songPlayingId !== id && playing) {
+            pausePlaylist();
         }
     })
 

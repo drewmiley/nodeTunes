@@ -1,9 +1,9 @@
 export const mapDispatchToProps = dispatch => ({
-    fetchData: url => dispatch(itemsFetchData(url)),
+    fetchData: url => dispatch(songsFetchData(url)),
     setSongPlayingId: songPlayingId => dispatch(setSongPlayingId(songPlayingId))
 });
 
-const itemsFetchData = params => dispatch => {
+const songsFetchData = params => dispatch => {
     let url = `http://localhost:8000/api/songs/title/${ params.title }?sortBy=${ params.sortBy }`;
     if (params.artist) {
         url += `&artist=${ params.artist }`;
@@ -22,12 +22,12 @@ const itemsFetchData = params => dispatch => {
         })
         .then(response => response.json())
         .then(response => response.results)
-        .then(items => dispatch(itemsFetchDataSuccess(items)));
+        .then(songs => dispatch(songsFetchDataSuccess(songs)));
 };
 
-const itemsFetchDataSuccess = items => ({
-    type: 'ITEMS_FETCH_DATA_SUCCESS',
-    items
+const songsFetchDataSuccess = songs => ({
+    type: 'SONGS_FETCH_DATA_SUCCESS',
+    songs
 });
 
 const setSongPlayingId = songPlayingId => dispatch => dispatch({ type: 'SET_SONG_PLAYING_ID', songPlayingId });

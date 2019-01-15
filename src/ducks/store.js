@@ -1,10 +1,10 @@
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { combineReducers } from 'redux';
-import { items, songPlayingId } from './reducers';
+import { songs, songPlayingId } from './reducers';
 
 const reducer = combineReducers({
-    items,
+    songs,
     songPlayingId
 });
 

@@ -1,7 +1,7 @@
-export function items(state = [], action) {
+export function songs(state = [], action) {
     switch (action.type) {
-        case 'ITEMS_FETCH_DATA_SUCCESS':
-            return action.items;
+        case 'SONGS_FETCH_DATA_SUCCESS':
+            return action.songs;
         default:
             return state;
     }

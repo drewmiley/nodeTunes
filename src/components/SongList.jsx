@@ -5,12 +5,12 @@ import SongPlayer from './SongPlayer';
 const SongList = props => {
     return (
         <>
-            {props.items.map((item, i) => (
+            {props.songs.map((song, i) => (
                 <div key={i} className='songContainer'>
-                    <p>{item.title} - {item.artist} - {item.album}</p>
+                    <p>{song.title} - {song.artist} - {song.album}</p>
                     <SongPlayer
                         onlyAllowOneSongToPlay={true}
-                        song={item}
+                        song={song}
                         songPlayingId={props.songPlayingId}
                         setSongPlayingId={props.setSongPlayingId}
                     />

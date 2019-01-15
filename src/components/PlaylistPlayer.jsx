@@ -91,6 +91,7 @@ const PlaylistPlayer = props => {
         if (props.songPlayingId !== id && playing) {
             pausePlaylist();
         }
+        // TODO: Remove song from playlist needs to be considered better here
         if (playlist && playlist._src !== props.songs[props.playlistSongPlayingIndex].location) {
             stopPlaylist(true);
         }

@@ -64,7 +64,12 @@ const PlaylistPlayer = props => {
 
     useEffect(() => {
         if (playlist) {
-            stopPlaylist();
+            const playIndex = props.songs.map(song => song.location).indexOf(playlist._src);
+            if (playIndex > -1) {
+                props.setPlaylistSongPlayingIndex(playIndex);
+            } else {
+                stopPlaylist();
+            }
         }
     }, [props.songs.length])
 

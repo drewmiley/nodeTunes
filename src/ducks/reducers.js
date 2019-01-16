@@ -5,7 +5,7 @@ export function playlistSongs(state = [], action) {
         case actiontypes.ADD_SONG_TO_PLAYLIST:
             return state.concat([action.song]);
         case actiontypes.REMOVE_SONG_FROM_PLAYLIST:
-            return state.filter(song => song !== action.song);
+            return state.filter((_, i) => i !== action.index);
         default:
             return state;
     }

@@ -74,7 +74,7 @@ const PlaylistPlayer = props => {
     }, [props.songs.length])
 
     return (
-      <div>
+      <>
           <p>
               <button
                   className={playing ? 'active-button': ''}
@@ -116,7 +116,7 @@ const PlaylistPlayer = props => {
                   Previous Song
               </button>
           </p>
-      </div>
+      </>
     );
 }
 

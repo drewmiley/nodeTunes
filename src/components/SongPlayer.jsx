@@ -57,7 +57,7 @@ const SongPlayer = props => {
     }, [props.songPlayingId])
 
     return (
-        <div>
+        <>
             <p>
                 <button
                     className={playing ? 'active-button': ''}
@@ -113,7 +113,7 @@ const SongPlayer = props => {
                     Playback Rate
                 </button>
             </p>
-        </div>
+        </>
     )
 }
 

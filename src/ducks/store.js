@@ -10,10 +10,4 @@ const reducer = combineReducers({
     playlistSongPlayingIndex
 });
 
-export default function configureStore(initialState) {
-    return createStore(
-        reducer,
-        initialState,
-        applyMiddleware(thunk)
-    );
-}
+export default createStore(reducer, undefined, applyMiddleware(thunk));

@@ -13,7 +13,7 @@ const PlaylistPlayer = props => {
             src: [songs[index].location],
             html5: true
         });
-        playlistValue.on('end', () => navigatePlaylist(1, playlistValue));
+        playlistValue.on('end', () => navigatePlaylist(1 + index, playlistValue));
         return playlistValue;
     }
 
@@ -24,9 +24,9 @@ const PlaylistPlayer = props => {
         startPlaying(idValue, playlistValue, initialIndex);
     }
 
-    const navigatePlaylist = (indexChange, p = playlist) => {
+    const navigatePlaylist = (index, p = playlist) => {
         p.stop(id);
-        const playIndex = props.playlistSongPlayingIndex + indexChange;
+        const playIndex = (index + props.songs.length) % props.songs.length;
         const playlistValue = getHowl(props.songs, playIndex, null);
         const idValue = playlistValue.play(null);
         startPlaying(idValue, playlistValue, playIndex);
@@ -100,19 +100,19 @@ const PlaylistPlayer = props => {
           <p>
               <button
                   disabled={!playlist || props.playlistSongPlayingIndex === props.songs.length - 1}
-                  onClick={() => navigatePlaylist(1)}
+                  onClick={() => navigatePlaylist(props.playlistSongPlayingIndex + 1)}
               >
                   Next Song
               </button>
               <button
                   disabled={!playlist}
-                  onClick={() => navigatePlaylist(0)}
+                  onClick={() => navigatePlaylist(props.playlistSongPlayingIndex)}
               >
                   Restart Song
               </button>
               <button
                   disabled={!playlist || props.playlistSongPlayingIndex === 0}
-                  onClick={() => navigatePlaylist(-1)}
+                  onClick={() => navigatePlaylist(props.playlistSongPlayingIndex - 1)}
               >
                   Previous Song
               </button>

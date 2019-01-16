@@ -26,6 +26,7 @@ const PlaylistPlayer = props => {
 
     const navigatePlaylist = (indexChange, p = playlist) => {
         p.stop(id);
+        // TODO: Navigate doesn't work for more than one instance of the same song
         const playIndex = props.songs.map(song => song.location).indexOf(p._src) + indexChange;
         const playlistValue = getHowl(props.songs, playIndex, null);
         const idValue = playlistValue.play(null);

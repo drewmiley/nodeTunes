@@ -9,7 +9,12 @@ const SongList = props => {
             {props.songs.map((song, i) => (
                 <div key={i} className='songContainer'>
                     <SongInfo song={song} />
-                    <button onClick={() => props.addSongToPlaylist(song)}>Add Song To Playlist</button>
+                    <button
+                        onClick={() => props.addSongToPlaylist(song)}
+                        disabled={props.playlistSongs.includes(song)}
+                    >
+                        Add Song To Playlist
+                    </button>
                     <SongPlayer
                         onlyAllowOneSongToPlay={true}
                         song={song}

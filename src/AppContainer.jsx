@@ -15,6 +15,7 @@ class App extends Component {
                 />
                 <SongList
                     songs={this.props.songs}
+                    playlistSongs={this.props.playlistSongs}
                     songPlayingId={this.props.songPlayingId}
                     setSongPlayingId={this.props.setSongPlayingId}
                     addSongToPlaylist={this.props.addSongToPlaylist}

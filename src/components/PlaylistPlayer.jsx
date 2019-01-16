@@ -8,24 +8,26 @@ const PlaylistPlayer = props => {
     const [playing, setPlaying] = useState(false);
     const [paused, setPaused] = useState(false);
 
-    const playPlaylist = () => {
-        const initialIndex = 0;
-        const playlistValue = playlist || new Howl({
-            src: [props.songs[initialIndex].location],
+    const getHowl = (songs, index, p = playlist) => {
+        const playlistValue = p || new Howl({
+            src: [songs[index].location],
             html5: true
         });
+        playlistValue.on('end', () => navigatePlaylist(1, playlistValue));
+        return playlistValue;
+    }
+
+    const playPlaylist = () => {
+        const initialIndex = 0;
+        const playlistValue = getHowl(props.songs, initialIndex);
         const idValue = playlistValue.play(id);
-        props.setPlaylistSongPlayingIndex(initialIndex);
         startPlaying(idValue, playlistValue, initialIndex);
     }
 
-    const navigatePlaylist = (indexChange) => {
-        playlist.stop(id);
-        const playIndex = props.songs.map(playlist => playlist.location).indexOf(playlist._src) + indexChange;
-        const playlistValue = new Howl({
-            src: [props.songs[playIndex].location],
-            html5: true
-        });
+    const navigatePlaylist = (indexChange, p = playlist) => {
+        p.stop(id);
+        const playIndex = props.songs.map(song => song.location).indexOf(p._src) + indexChange;
+        const playlistValue = getHowl(props.songs, playIndex, null);
         const idValue = playlistValue.play(null);
         startPlaying(idValue, playlistValue, playIndex);
     }

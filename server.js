@@ -10,7 +10,8 @@ const port = 8000;
 const fs = require("fs");
 const itunes = require("itunes-data");
 const parser = itunes.parser();
-const stream = fs.createReadStream(`${ process.env.HOME }/Music/iTunes/iTunes\ Music\ Library.xml`);
+// TODO: Write this using async/await need to load the xml file using fetch
+const stream = fs.createReadStream('file://http//localhost:3000/iTunes%20Music%20Library.xml');
 
 let songs = []
 
@@ -19,7 +20,7 @@ parser.on("track", track => {
         album: track['Album'],
         artist: track['Artist'],
         length: track['Total Time'],
-        location: track['Location'].replace('file:///Users/drewmiley/Music/iTunes/iTunes%20Media/Music', 'http://localhost:3000'),
+        location: track['Location'].replace('file:///Users/drewmiley/Music/iTunes', 'http://localhost:3000'),
         runningOrder: {
             ...(track['Disc Count'] > 1 && { disc: track['Disc Number'] }),
             number: track['Track Number']

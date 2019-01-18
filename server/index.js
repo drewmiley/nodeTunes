@@ -2,7 +2,8 @@ const express = require('express');
 const cors = require('cors')
 const app = express();
 const bodyParser = require('body-parser');
-const loadLibrary = require('./xml');
+const getSongFromLibraryTrack = require('./getSongFromLibraryTrack');
+const loadLibrary = require('./loadLibrary');
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -10,8 +11,7 @@ const port = 8000;
 
 let songs = [];
 loadLibrary().then(libraryTracks => {
-  console.log(libraryTracks[0]);
-  songs = libraryTracks;
+  songs = libraryTracks.map(getSongFromLibraryTrack);
 });
 
 const router = express.Router();

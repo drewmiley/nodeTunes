@@ -41,7 +41,4 @@ const loadLibrary = async () => {
   // });
 };
 
-const library = loadLibrary();
-library.then(libraryTracks => {
-  console.log(libraryTracks[0]);
-});
+module.exports = loadLibrary;

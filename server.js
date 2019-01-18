@@ -2,35 +2,17 @@ const express = require('express');
 const cors = require('cors')
 const app = express();
 const bodyParser = require('body-parser');
+const loadLibrary = require('./xml');
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 const port = 8000;
 
-const fs = require("fs");
-const itunes = require("itunes-data");
-const parser = itunes.parser();
-// TODO: Write this using async/await need to load the xml file using fetch
-const stream = fs.createReadStream('file://http//localhost:3000/iTunes%20Music%20Library.xml');
-
-let songs = []
-
-parser.on("track", track => {
-    const song = {
-        album: track['Album'],
-        artist: track['Artist'],
-        length: track['Total Time'],
-        location: track['Location'].replace('file:///Users/drewmiley/Music/iTunes', 'http://localhost:3000'),
-        runningOrder: {
-            ...(track['Disc Count'] > 1 && { disc: track['Disc Number'] }),
-            number: track['Track Number']
-        },
-        title: track['Name']
-    }
-    songs.push(song);
+let songs = [];
+loadLibrary().then(libraryTracks => {
+  console.log(libraryTracks[0]);
+  songs = libraryTracks;
 });
-
-stream.pipe(parser);
 
 const router = express.Router();
 router.use((req, res, next) => {

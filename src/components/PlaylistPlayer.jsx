@@ -7,7 +7,6 @@ const PlaylistPlayer = props => {
     const [playlist, setPlaylist] = useState(null);
     const [playing, setPlaying] = useState(false);
     const [paused, setPaused] = useState(false);
-    const [loop, setLoop] = useState(false);
 
     const getHowl = (songs, index, p = playlist) => {
         const playlistValue = p || new Howl({
@@ -116,13 +115,6 @@ const PlaylistPlayer = props => {
                   onClick={() => navigatePlaylist(props.playlistSongPlayingIndex - 1)}
               >
                   Previous Song
-              </button>
-          </p>
-          <p>
-              <button
-                  onClick={() => setLoop(!loop)}
-              >
-                  {loop ? 'Looping' : 'Not looping'}
               </button>
           </p>
       </>

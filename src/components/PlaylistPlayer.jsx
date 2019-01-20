@@ -99,7 +99,7 @@ const PlaylistPlayer = props => {
           </p>
           <p>
               <button
-                  disabled={!playlist || props.playlistSongPlayingIndex === props.songs.length - 1}
+                  disabled={!playlist}
                   onClick={() => navigatePlaylist(props.playlistSongPlayingIndex + 1)}
               >
                   Next Song
@@ -111,7 +111,7 @@ const PlaylistPlayer = props => {
                   Restart Song
               </button>
               <button
-                  disabled={!playlist || props.playlistSongPlayingIndex === 0}
+                  disabled={!playlist}
                   onClick={() => navigatePlaylist(props.playlistSongPlayingIndex - 1)}
               >
                   Previous Song

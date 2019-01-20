@@ -34,10 +34,13 @@ const removeSongFromPlaylist = index => dispatch => dispatch({ type: actiontypes
 
 const setPlaylistSongPlayingIndex = index => dispatch => dispatch({type: actiontypes.SET_PLAYLIST_SONG_PLAYING_INDEX, index});
 
+const setPlaylist = songs => dispatch => dispatch({type: actiontypes.SET_PLAYLIST, songs});
+
 export const mapDispatchToProps = dispatch => ({
     fetchData: url => dispatch(songsFetchData(url)),
     setSongPlayingId: songPlayingId => dispatch(setSongPlayingId(songPlayingId)),
     addSongToPlaylist: song => dispatch(addSongToPlaylist(song)),
     removeSongFromPlaylist: index => dispatch(removeSongFromPlaylist(index)),
-    setPlaylistSongPlayingIndex: i => dispatch(setPlaylistSongPlayingIndex(i))
+    setPlaylistSongPlayingIndex: i => dispatch(setPlaylistSongPlayingIndex(i)),
+    setPlaylist: songs => dispatch(setPlaylist(songs))
 });

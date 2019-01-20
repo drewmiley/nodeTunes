@@ -6,6 +6,8 @@ export function playlistSongs(state = [], action) {
             return state.concat([action.song]);
         case actiontypes.REMOVE_SONG_FROM_PLAYLIST:
             return state.filter((_, i) => i !== action.index);
+        case actiontypes.SET_PLAYLIST:
+            return action.songs;
         default:
             return state;
     }

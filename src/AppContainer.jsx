@@ -29,6 +29,7 @@ class App extends Component {
                     removeSongFromPlaylist={this.props.removeSongFromPlaylist}
                     setPlaylistSongPlayingIndex={this.props.setPlaylistSongPlayingIndex}
                     playlistSongPlayingIndex={this.props.playlistSongPlayingIndex}
+                    setPlaylist={this.props.setPlaylist}
                 />
             </div>
         </>

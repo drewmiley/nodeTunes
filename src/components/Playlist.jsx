@@ -5,7 +5,7 @@ import PlaylistPlayer from './PlaylistPlayer';
 import SortablePlaylist from './SortablePlaylist';
 
 export default class Playlist extends Component {
-    onSortEnd = ({oldIndex, newIndex}) => {
+    onSortEnd({oldIndex, newIndex}) {
         const newPlaylist = arrayMove(this.props.songs, oldIndex, newIndex);
         if (this.props.playlistSongPlayingIndex >= 0) {
             const newPlayingIndex = newPlaylist.indexOf(this.props.songs[this.props.playlistSongPlayingIndex]);
@@ -27,10 +27,9 @@ export default class Playlist extends Component {
                 />
                 <SortablePlaylist
                     lockAxis={'y'}
-                    onSortEnd={this.onSortEnd}
+                    onSortEnd={this.onSortEnd.bind(this)}
                     songs={this.props.songs}
                     playlistSongPlayingIndex={this.props.playlistSongPlayingIndex}
-                    setPlaylistSongPlayingIndex={this.props.setPlaylistSongPlayingIndex}
                     removeSongFromPlaylist={this.props.removeSongFromPlaylist}
                 />
             </>

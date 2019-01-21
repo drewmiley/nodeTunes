@@ -4,35 +4,35 @@ import { arrayMove } from 'react-sortable-hoc';
 import PlaylistPlayer from './PlaylistPlayer';
 import SortablePlaylist from './SortablePlaylist';
 
-export default class Playlist extends Component {
-    onSortEnd({oldIndex, newIndex}) {
-        const newPlaylist = arrayMove(this.props.songs, oldIndex, newIndex);
-        if (this.props.playlistSongPlayingIndex >= 0) {
-            const newPlayingIndex = newPlaylist.indexOf(this.props.songs[this.props.playlistSongPlayingIndex]);
-            this.props.setPlaylistSongPlayingIndex(newPlayingIndex);
+const Playlist = props => {
+    const onSortEnd = ({oldIndex, newIndex}) => {
+        const newPlaylist = arrayMove(props.songs, oldIndex, newIndex);
+        if (props.playlistSongPlayingIndex >= 0) {
+            const newPlayingIndex = newPlaylist.indexOf(props.songs[props.playlistSongPlayingIndex]);
+            props.setPlaylistSongPlayingIndex(newPlayingIndex);
         }
-        this.props.setPlaylist(newPlaylist);
+        props.setPlaylist(newPlaylist);
     };
 
-    render() {
-        return (
-            <>
-                <h1>Playlist</h1>
-                <PlaylistPlayer
-                    songs={this.props.songs}
-                    songPlayingId={this.props.songPlayingId}
-                    setSongPlayingId={this.props.setSongPlayingId}
-                    playlistSongPlayingIndex={this.props.playlistSongPlayingIndex}
-                    setPlaylistSongPlayingIndex={this.props.setPlaylistSongPlayingIndex}
-                />
-                <SortablePlaylist
-                    lockAxis={'y'}
-                    onSortEnd={this.onSortEnd.bind(this)}
-                    songs={this.props.songs}
-                    playlistSongPlayingIndex={this.props.playlistSongPlayingIndex}
-                    removeSongFromPlaylist={this.props.removeSongFromPlaylist}
-                />
-            </>
-        );
-    }
+    return (
+        <>
+            <h1>Playlist</h1>
+            <PlaylistPlayer
+                songs={props.songs}
+                songPlayingId={props.songPlayingId}
+                setSongPlayingId={props.setSongPlayingId}
+                playlistSongPlayingIndex={props.playlistSongPlayingIndex}
+                setPlaylistSongPlayingIndex={props.setPlaylistSongPlayingIndex}
+            />
+            <SortablePlaylist
+                lockAxis={'y'}
+                onSortEnd={onSortEnd}
+                songs={props.songs}
+                playlistSongPlayingIndex={props.playlistSongPlayingIndex}
+                removeSongFromPlaylist={props.removeSongFromPlaylist}
+            />
+        </>
+    );
 }
+
+export default Playlist;

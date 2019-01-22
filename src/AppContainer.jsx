@@ -8,6 +8,9 @@ import { mapDispatchToProps } from './ducks/actions';
 
 class App extends Component {
     render() {
+        const sessionStoragePlaylistSongs = localStorage.getItem('playlistSongs')
+        const playlistSongsValue = (sessionStoragePlaylistSongs && sessionStoragePlaylistSongs !== "undefined") ? JSON.parse(sessionStoragePlaylistSongs) : [];
+        console.log(playlistSongsValue);
         return <>
             <div className='half-width'>
                 <SongSearch

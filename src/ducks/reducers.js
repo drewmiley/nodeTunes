@@ -1,16 +1,22 @@
 import * as actiontypes from './actiontypes';
 
 export function playlistSongs(state = [], action) {
-    switch (action.type) {
-        case actiontypes.ADD_SONG_TO_PLAYLIST:
-            return state.concat([action.song]);
-        case actiontypes.REMOVE_SONG_FROM_PLAYLIST:
-            return state.filter((_, i) => i !== action.index);
-        case actiontypes.SET_PLAYLIST:
-            return action.songs;
-        default:
-            return state;
+    const playlistSongs = ((state, action) => {
+        switch (action.type) {
+            case actiontypes.ADD_SONG_TO_PLAYLIST:
+                return state.concat([action.song]);
+            case actiontypes.REMOVE_SONG_FROM_PLAYLIST:
+                return state.filter((_, i) => i !== action.index);
+            case actiontypes.SET_PLAYLIST:
+                return action.songs;
+            default:
+                return state;
+        }
+    })(state, action);
+    if (playlistSongs.length && action.type !== actiontypes.REMOVE_SONG_FROM_PLAYLIST) {
+        localStorage.setItem('playlistSongs', JSON.stringify(playlistSongs));
     }
+    return playlistSongs;
 }
 
 export function songs(state = [], action) {

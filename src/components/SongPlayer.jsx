@@ -7,9 +7,9 @@ const SongPlayer = props => {
     const [song, setSong] = useState(null);
     const [playing, setPlaying] = useState(false);
     const [paused, setPaused] = useState(false);
-    const [fastforward, setFastforward] = useState(null);
-    const [rewind, setRewind] = useState(null);
-    const [speed, setSpeed] = useState(null);
+    const [fastforward, setFastforward] = useState('');
+    const [rewind, setRewind] = useState('');
+    const [speed, setSpeed] = useState('');
 
     const playSong = () => {
         const songValue = song || new Howl({
@@ -56,6 +56,16 @@ const SongPlayer = props => {
         }
     }, [props.songPlayingId])
 
+    useEffect(() => {
+      setId(null);
+      setSong(null);
+      setPlaying(false);
+      setPaused(false);
+      setFastforward('');
+      setRewind('');
+      setSpeed('');
+    }, [props.song])
+
     return (
         <>
             <p>
@@ -82,6 +92,7 @@ const SongPlayer = props => {
             <p>
                 <input
                     type='text' placeholder='Rewind Seconds'
+                    value={rewind}
                     onChange={(e) => setRewind(parseFloat(e.target.value))}
                 />
                 <button
@@ -98,12 +109,14 @@ const SongPlayer = props => {
                 </button>
                 <input
                     type='text' placeholder='FastForward Seconds'
+                    value={fastforward}
                     onChange={(e) => setFastforward(parseFloat(e.target.value))}
                 />
             </p>
             <p>
                 <input
                     type='text' placeholder='Playback Rate'
+                    value={speed}
                     onChange={(e) => setSpeed(parseFloat(e.target.value))}
                 />
                 <button

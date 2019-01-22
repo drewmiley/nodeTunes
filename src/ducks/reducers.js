@@ -13,7 +13,7 @@ export function playlistSongs(state = [], action) {
                 return state;
         }
     })(state, action);
-    if (playlistSongs.length && action.type !== actiontypes.REMOVE_SONG_FROM_PLAYLIST) {
+    if (Object.keys(actiontypes).includes(action.type)) {
         localStorage.setItem('playlistSongs', JSON.stringify(playlistSongs));
     }
     return playlistSongs;

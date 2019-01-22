@@ -6,8 +6,8 @@ import AppContainer from './src/AppContainer';
 import store from './src/ducks/store';
 
 ReactDOM.render(
-  <Provider store={store}>
-      <AppContainer />
-  </Provider>,
-  document.getElementById('root')
+    <Provider store={store}>
+        <AppContainer />
+    </Provider>,
+    document.getElementById('root')
 );

@@ -10,4 +10,8 @@ const reducer = combineReducers({
     playlistSongPlayingIndex
 });
 
+const sessionStoragePlaylistSongs = localStorage.getItem('playlistSongs')
+const playlistSongsValue = (sessionStoragePlaylistSongs && sessionStoragePlaylistSongs !== "undefined") ? JSON.parse(sessionStoragePlaylistSongs) : [];
+console.log(playlistSongsValue);
+
 export default createStore(reducer, undefined, applyMiddleware(thunk));

@@ -68,11 +68,14 @@ const PlaylistPlayer = props => {
             const playIndex = props.songs.map(song => song.location).indexOf(playlist._src);
             if (playIndex > -1) {
                 props.setPlaylistSongPlayingIndex(playIndex);
+                const playlistValue = playlist;
+                playlistValue.on('end', () => navigatePlaylist(1 + playIndex, playlistValue));
+                setPlaylist(playlistValue);
             } else {
                 stopPlaylist();
             }
         }
-    }, [props.songs.length])
+    }, [props.songs])
 
     return (
       <>

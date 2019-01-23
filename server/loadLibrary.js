@@ -1,7 +1,7 @@
 const fetch = require('node-fetch');
 
-const loadLibrary = async () => {
-    const response = await fetch('http://localhost:3000/iTunes%20Music%20Library.xml');
+const loadLibrary = async (url) => {
+    const response = await fetch(`${ url || 'http://localhost:3000' }/iTunes%20Music%20Library.xml`);
     const text = await response.text();
     const startIndex = text.indexOf('<key>Tracks</key>') + '<key>Tracks</key>'.length;
     const endIndex = text.indexOf('<key>Playlists</key>');

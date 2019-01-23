@@ -255,12 +255,12 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://localhost:8080/api/loadNewLibrary?url=d058daac.ngrok.io",
+					"raw": "http://localhost:8000/api/loadNewLibrary?url=http://d058daac.ngrok.io",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "8080",
+					"port": "8000",
 					"path": [
 						"api",
 						"loadNewLibrary"
@@ -268,7 +268,7 @@
 					"query": [
 						{
 							"key": "url",
-							"value": "d058daac.ngrok.io"
+							"value": "http://d058daac.ngrok.io"
 						}
 					]
 				}

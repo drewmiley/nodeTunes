@@ -11,7 +11,8 @@ const port = 8000;
 
 let songs = [];
 loadLibrary().then(libraryTracks => {
-  songs = libraryTracks.map(getSongFromLibraryTrack);
+    const songMapper = getSongFromLibraryTrack();
+    songs = libraryTracks.map(songMapper);
 });
 
 const router = express.Router();
@@ -33,7 +34,11 @@ const filterByQueryParams = queryParams => obj => {
 }
 
 router.get('/loadNewLibrary', (req, res) => {
-    res.json(req.query.url);
+    loadLibrary(req.query.url).then(libraryTracks => {
+        const songMapper = getSongFromLibraryTrack(req.query.url);
+        songs = libraryTracks.map(songMapper);
+    });
+    res.json({ message: `loaded ${ songs.length } songs from ${ req.query.url }` });
 });
 
 router.get('/songs/album/:album', (req, res) => {

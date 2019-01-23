@@ -1,5 +1,6 @@
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const path = require('path');
+const webpack = require('webpack');
 
 module.exports = {
   target: "web",
@@ -28,6 +29,9 @@ module.exports = {
     ]
   },
   plugins: [
+    new webpack.DefinePlugin({
+      'process.env.API_URL': JSON.stringify(process.env.API_URL || 'http://localhost:8000')
+    }),
     new CopyWebpackPlugin(["index.html"])
   ]
 };

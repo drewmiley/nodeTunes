@@ -1,7 +1,7 @@
 import * as actiontypes from './actiontypes';
 
 const songsFetchData = params => dispatch => {
-    let url = `http://localhost:8000/api/songs/title/${ params.title }?sortBy=${ params.sortBy }`;
+    let url = `${ process.env.API_URL }/api/songs/title/${ params.title }?sortBy=${ params.sortBy }`;
     if (params.artist) {
         url += `&artist=${ params.artist }`;
     }

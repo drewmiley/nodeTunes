@@ -7,7 +7,7 @@ const loadLibrary = require('./loadLibrary');
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-const port = process.env.port || 8000;
+const port = process.env.PORT || 8000;
 
 let songs = [];
 loadLibrary().then(libraryTracks => {
@@ -39,6 +39,11 @@ router.get('/loadNewLibrary', (req, res) => {
         songs = libraryTracks.map(songMapper);
     });
     res.json({ message: `loaded ${ songs.length } songs from ${ req.query.url }` });
+});
+
+router.get('/clearLibrary', (req, res) => {
+    songs = [];
+    res.json({ message: 'library cleared' });
 });
 
 router.get('/songs/album/:album', (req, res) => {

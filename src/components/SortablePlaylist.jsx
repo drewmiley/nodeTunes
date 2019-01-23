@@ -11,9 +11,7 @@ export default SortableContainer(({songs, playlistSongPlayingIndex, removeSongFr
                     key={`item-${index}`}
                     index={index}
                     value={index}
-                    title={song.title}
-                    artist={song.artist}
-                    album={song.album}
+                    song={song}
                     playlistSongPlayingIndex={playlistSongPlayingIndex}
                     removeSongFromPlaylist={removeSongFromPlaylist}
                 />

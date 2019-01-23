@@ -31,7 +31,7 @@ module.exports = env => {
     },
     plugins: [
       new webpack.DefinePlugin({
-        'process.env.API_URL': JSON.stringify(env.API_URL || 'http://localhost:8000')
+        'process.env.API_URL': JSON.stringify(env.API_URL)
       }),
       new CopyWebpackPlugin(["index.html"])
     ]

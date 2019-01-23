@@ -32,6 +32,10 @@ const filterByQueryParams = queryParams => obj => {
     return fields.find(field =>!(obj[field] && obj[field].toUpperCase().includes(queryParams[field].toUpperCase()))) === undefined
 }
 
+router.get('/loadNewLibrary', (req, res) => {
+    res.json(req.query.url);
+});
+
 router.get('/songs/album/:album', (req, res) => {
     // Allowed query params- sortBy, artist
     // SortBy options- album, artist, length, SONGNUMBER

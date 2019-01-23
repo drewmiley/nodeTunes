@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "ae296505-adac-4ba9-972e-5bfb19ec5166",
+		"_postman_id": "ac9bd558-f852-4be9-bbab-e87e3783912c",
 		"name": "nodeTunes",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -240,6 +240,36 @@
 					"path": [
 						"api",
 						"artists"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Load new library",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/loadNewLibrary?url=d058daac.ngrok.io",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"loadNewLibrary"
+					],
+					"query": [
+						{
+							"key": "url",
+							"value": "d058daac.ngrok.io"
+						}
 					]
 				}
 			},

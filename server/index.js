@@ -7,7 +7,7 @@ const loadLibrary = require('./loadLibrary');
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-const port = 8000;
+const port = process.env.port || 8000;
 
 let songs = [];
 loadLibrary().then(libraryTracks => {

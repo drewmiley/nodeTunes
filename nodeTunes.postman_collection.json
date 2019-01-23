@@ -274,6 +274,30 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "Clear library",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/clearLibrary",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"clearLibrary"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }

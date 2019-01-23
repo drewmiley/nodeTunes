@@ -37,8 +37,8 @@ router.get('/loadNewLibrary', (req, res) => {
     loadLibrary(req.query.url).then(libraryTracks => {
         const songMapper = getSongFromLibraryTrack(req.query.url);
         songs = libraryTracks.map(songMapper);
+        res.json({ message: `loaded ${ songs.length } songs from ${ req.query.url }` });
     });
-    res.json({ message: `loaded ${ songs.length } songs from ${ req.query.url }` });
 });
 
 router.get('/clearLibrary', (req, res) => {

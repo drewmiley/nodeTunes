@@ -7,9 +7,9 @@ module.exports = env => {
     target: "web",
     mode: "development",
     devtool: "source-map",
-    entry: "./index.jsx",
+    entry: "./src/index.jsx",
     output: {
-      path: path.resolve(__dirname, "dist"),
+      path: path.resolve(__dirname),
       filename: "app.js",
     },
     resolve: {
@@ -33,7 +33,7 @@ module.exports = env => {
       new webpack.DefinePlugin({
         'process.env.API_URL': JSON.stringify(env.API_URL)
       }),
-      new CopyWebpackPlugin(["index.html"])
+      new CopyWebpackPlugin(["src/index.html"])
     ]
   }
 };

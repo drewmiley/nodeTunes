@@ -7,6 +7,15 @@ import SongSearch from './components/SongSearch';
 import { mapDispatchToProps } from './ducks/actions';
 
 class App extends Component {
+    componentDidMount() {
+        if (window.location.search.substring(1)) {
+            console.log(`loading from ${ window.location.search.substring(1) }`);
+            fetch(`${ process.env.API_URL }/api/loadNewLibrary?url=${ window.location.search.substring(1) }`)
+                .then(res => res.json())
+                .then(console.log);
+        }
+    }
+
     render() {
         return <>
             <div className='half-width'>

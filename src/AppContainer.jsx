@@ -13,13 +13,18 @@ class App extends Component {
     }
 
     componentDidMount() {
+        let url = `${ process.env.API_URL }/api/`;
         if (window.location.search.substring(1)) {
             console.log(`loading from ${ window.location.search.substring(1) }`);
-            fetch(`${ process.env.API_URL }/api/loadNewLibrary?url=${ window.location.search.substring(1) }`)
-                .then(res => res.json())
-                .then(console.log)
-                .then(() => this.setState({ loading: false }));
+            url += `loadNewLibrary?url=${ window.location.search.substring(1) }`;
+        } else {
+            console.log('clearing library');
+            url += 'clearLibrary';
         }
+        fetch(url)
+            .then(res => res.json())
+            .then(console.log)
+            .then(() => this.setState({ loading: false }));
     }
 
     render() {

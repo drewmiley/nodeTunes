@@ -91,9 +91,9 @@ const SongPlayer = props => {
             </p>
             <p>
                 <input
-                    type='text' placeholder='Rewind Seconds'
+                    type='number' placeholder='Rewind Seconds'
                     value={rewind}
-                    onChange={(e) => setRewind(parseFloat(e.target.value))}
+                    onChange={(e) => setRewind(parseFloat(e.target.value) || '')}
                 />
                 <button
                     disabled={!song || !rewind}
@@ -108,16 +108,16 @@ const SongPlayer = props => {
                     {">>"}
                 </button>
                 <input
-                    type='text' placeholder='FastForward Seconds'
+                    type='number' placeholder='FastForward Seconds'
                     value={fastforward}
-                    onChange={(e) => setFastforward(parseFloat(e.target.value))}
+                    onChange={(e) => setFastforward(parseFloat(e.target.value) || '')}
                 />
             </p>
             <p>
                 <input
-                    type='text' placeholder='Playback Rate'
+                    type='number' placeholder='Playback Rate'
                     value={speed}
-                    onChange={(e) => setSpeed(parseFloat(e.target.value))}
+                    onChange={(e) => setSpeed(parseFloat(e.target.value) || '')}
                 />
                 <button
                     disabled={(!song || !speed || speed < 0.5 || speed > 4)}

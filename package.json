@@ -5,7 +5,7 @@
   "main": "\"\"",
   "scripts": {
     "app": "webpack-dev-server --env.API_URL=http://localhost:8000",
-    "prodApp": "webpack -p --env.API_URL=https://node-tunes-api.herokuapp.com",
+    "prodApp": "webpack -p --env.API_URL=https://node-tunes-api.herokuapp.com && rm app.js.map",
     "music": "(cd $HOME/Music/iTunes && http-server -p 3000 --cors)",
     "server": "node server/index.js"
   },

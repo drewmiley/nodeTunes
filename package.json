@@ -23,6 +23,7 @@
     "howler": "2.0.15",
     "node-fetch": "^2.3.0",
     "react": "^16.8.6",
+    "react-autocomplete": "^1.8.1",
     "react-dom": "^16.8.6",
     "react-redux": "^5.0.7",
     "react-sortable-hoc": "^1.4.0",

@@ -10,6 +10,7 @@ const SongSearch = props => {
 
     return (
         <>
+            <button onClick={fetchData}>Fetch Songs</button>
             <input type='text' placeholder='Artist' onChange={(e) => setArtist(e.target.value)}/>
             <input type='text' placeholder='Album' onChange={(e) => setAlbum(e.target.value)}/>
             <input type='text' placeholder='Title' onChange={(e) => setTitle(e.target.value)}/>
@@ -19,7 +20,6 @@ const SongSearch = props => {
                 <option value="length">Length</option>
                 <option value="title">Title</option>
             </select>
-            <button onClick={fetchData}>Fetch Songs</button>
         </>
     );
 }

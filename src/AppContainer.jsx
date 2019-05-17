@@ -34,12 +34,11 @@ class App extends Component {
             return <h1>Loading from { window.location.search.substring(1) }</h1>
         }
 
-        console.log(this.props.albums);
-        console.log(this.props.artists);
-
         return <>
             <div className='half-width'>
                 <SongSearch
+                    artists={this.props.artists}
+                    albums={this.props.albums}
                     fetchData={this.props.fetchData}
                 />
                 <SongList

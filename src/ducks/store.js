@@ -1,13 +1,15 @@
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { combineReducers } from 'redux';
-import { playlistSongs, songs, songPlayingId, playlistSongPlayingIndex } from './reducers';
+import { playlistSongs, songs, songPlayingId, playlistSongPlayingIndex, artists, albums } from './reducers';
 
 const reducer = combineReducers({
     playlistSongs,
     songs,
     songPlayingId,
-    playlistSongPlayingIndex
+    playlistSongPlayingIndex,
+    artists,
+    albums
 });
 
 const sessionStoragePlaylistSongs = localStorage.getItem('playlistSongs');
@@ -15,6 +17,8 @@ const playlistSongsValue = (sessionStoragePlaylistSongs && sessionStoragePlaylis
 
 export default createStore(reducer, {
     playlistSongs: playlistSongsValue,
+    artists: [],
+    albums: [],
     songs: [],
     songPlayingId: null,
     playlistSongPlayingIndex: null

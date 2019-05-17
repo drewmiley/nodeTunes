@@ -27,6 +27,44 @@ const songsFetchDataSuccess = songs => ({
     songs
 });
 
+const fetchArtists = () => dispatch => {
+    fetch(`${ process.env.API_URL }/api/artists`)
+        .then(response => {
+            if (!response.ok) {
+                throw Error(response.statusText);
+            }
+
+            return response;
+        })
+        .then(response => response.json())
+        .then(response => response.results)
+        .then(artists => dispatch(artistsFetchDataSuccess(artists.map(artist => artist.name))));
+};
+
+const artistsFetchDataSuccess = artists => ({
+    type: actiontypes.ARTISTS_FETCH_DATA_SUCCESS,
+    artists
+});
+
+const fetchAlbums = () => dispatch => {
+    fetch(`${ process.env.API_URL }/api/albums`)
+        .then(response => {
+            if (!response.ok) {
+                throw Error(response.statusText);
+            }
+
+            return response;
+        })
+        .then(response => response.json())
+        .then(response => response.results)
+        .then(albums => dispatch(albumsFetchDataSuccess(albums.map(album => album.title))));
+};
+
+const albumsFetchDataSuccess = albums => ({
+    type: actiontypes.ALBUMS_FETCH_DATA_SUCCESS,
+    albums
+});
+
 const setSongPlayingId = songPlayingId => dispatch => dispatch({ type: actiontypes.SET_SONG_PLAYING_ID, songPlayingId });
 
 const addSongToPlaylist = song => dispatch => dispatch({ type: actiontypes.ADD_SONG_TO_PLAYLIST, song });
@@ -37,10 +75,12 @@ const setPlaylistSongPlayingIndex = index => dispatch => dispatch({type: actiont
 const setPlaylist = songs => dispatch => dispatch({type: actiontypes.SET_PLAYLIST, songs});
 
 export const mapDispatchToProps = dispatch => ({
-    fetchData: url => dispatch(songsFetchData(url)),
+    fetchData: params => dispatch(songsFetchData(params)),
     setSongPlayingId: songPlayingId => dispatch(setSongPlayingId(songPlayingId)),
     addSongToPlaylist: song => dispatch(addSongToPlaylist(song)),
     removeSongFromPlaylist: index => dispatch(removeSongFromPlaylist(index)),
     setPlaylistSongPlayingIndex: i => dispatch(setPlaylistSongPlayingIndex(i)),
-    setPlaylist: songs => dispatch(setPlaylist(songs))
+    setPlaylist: songs => dispatch(setPlaylist(songs)),
+    fetchArtists: () => dispatch(fetchArtists()),
+    fetchAlbums: () => dispatch(fetchAlbums())
 });

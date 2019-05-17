@@ -45,3 +45,21 @@ export function playlistSongPlayingIndex(state = null, action) {
             return state;
     }
 }
+
+export function artists(state = [], action) {
+    switch (action.type) {
+        case actiontypes.ARTISTS_FETCH_DATA_SUCCESS:
+            return action.artists;
+        default:
+            return state;
+    }
+}
+
+export function albums(state = [], action) {
+    switch (action.type) {
+        case actiontypes.ALBUMS_FETCH_DATA_SUCCESS:
+            return action.albums;
+        default:
+            return state;
+    }
+}

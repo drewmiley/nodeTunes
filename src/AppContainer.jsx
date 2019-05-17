@@ -24,6 +24,8 @@ class App extends Component {
         fetch(url)
             .then(res => res.json())
             .then(console.log)
+            .then(this.props.fetchArtists)
+            .then(this.props.fetchAlbums)
             .then(() => this.setState({ loading: false }));
     }
 
@@ -35,6 +37,8 @@ class App extends Component {
         return <>
             <div className='half-width'>
                 <SongSearch
+                    artists={this.props.artists}
+                    albums={this.props.albums}
                     fetchData={this.props.fetchData}
                 />
                 <SongList

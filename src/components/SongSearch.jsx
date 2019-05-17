@@ -10,7 +10,7 @@ const SongSearch = props => {
     const fetchData = () => props.fetchData({ artist, album, sortBy, title });
     // TODO: Refactor autocomplete
     // TODO: Style dropdown menu width: 45%
-    console.log(props)
+    // TODO: Placeholder does not work
     return (
         <>
             <button onClick={fetchData}>Fetch Songs</button>

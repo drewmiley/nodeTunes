@@ -9,8 +9,6 @@ const SongSearch = props => {
 
     const fetchData = () => props.fetchData({ artist, album, sortBy, title });
     // TODO: Refactor autocomplete
-    // TODO: Style dropdown menu width: 45%
-    // TODO: Placeholder does not work
     return (
         <>
             <button onClick={fetchData}>Fetch Songs</button>
@@ -20,7 +18,8 @@ const SongSearch = props => {
                 renderItem={(item, isHighlighted) =><div style={{ fontSize: '30px', background: isHighlighted ? 'lightgray' : 'white' }} key={item}>{item}</div>}
                 shouldItemRender={(item, value) => item && item.includes(value)}
                 value={artist}
-                placeholder='Artist'
+                inputProps={{ placeholder: 'Artist' }}
+                menuStyle={{ width: '45%' }}
                 onChange={e => setArtist(e.target.value)}
                 onSelect={val => setArtist(val)}
             />
@@ -30,7 +29,8 @@ const SongSearch = props => {
                 renderItem={(item, isHighlighted) =><div style={{ fontSize: '30px', background: isHighlighted ? 'lightgray' : 'white' }} key={item}>{item}</div>}
                 shouldItemRender={(item, value) => item && item.includes(value)}
                 value={album}
-                placeholder='Album'
+                inputProps={{ placeholder: 'Album' }}
+                menuStyle={{ width: '45%' }}
                 onChange={e => setAlbum(e.target.value)}
                 onSelect={val => setAlbum(val)}
             />

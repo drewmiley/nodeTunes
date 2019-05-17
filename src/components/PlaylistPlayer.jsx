@@ -14,7 +14,7 @@ const PlaylistPlayer = props => {
             src: [songs[index].location],
             html5: true
         });
-        playlistValue.on('end', () => navigatePlaylist(1 + index, playlistValue));
+        playlistValue.on('pause', () => navigatePlaylist(1 + index, playlistValue));
         return playlistValue;
     }
 
@@ -64,7 +64,7 @@ const PlaylistPlayer = props => {
         }
     }, [props.songPlayingId])
 
-    useEffect(() => {
+    const onSongsChange = playlist => {
         if (playlist) {
             // TODO: Navigate doesn't work for more than one instance of the same song
             console.log("songChange")
@@ -72,13 +72,15 @@ const PlaylistPlayer = props => {
             if (playIndex > -1) {
                 props.setPlaylistSongPlayingIndex(playIndex);
                 const playlistValue = playlist;
-                playlistValue.on('end', () => navigatePlaylist(1 + playIndex, playlistValue));
+                playlistValue.on('pause', () => navigatePlaylist(1 + playIndex, playlistValue));
                 setPlaylist(playlistValue);
             } else {
                 stopPlaylist();
             }
         }
-    }, [props.songs])
+    }
+
+    useEffect(() => onSongsChange(playlist), [props.songs]);
 
     return (
       <>

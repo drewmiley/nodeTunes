@@ -1,6 +1,6 @@
 import * as actiontypes from './actiontypes';
 
-export function playlistSongs(state = [], action) {
+export const playlistSongs = (state = [], action) => {
     const playlistSongs = ((state, action) => {
         switch (action.type) {
             case actiontypes.ADD_SONG_TO_PLAYLIST:
@@ -19,7 +19,7 @@ export function playlistSongs(state = [], action) {
     return playlistSongs;
 }
 
-export function songs(state = [], action) {
+export const songs = (state = [], action) => {
     switch (action.type) {
         case actiontypes.SONGS_FETCH_DATA_SUCCESS:
             return action.songs;
@@ -28,7 +28,7 @@ export function songs(state = [], action) {
     }
 }
 
-export function songPlayingId(state = null, action) {
+export const songPlayingId = (state = null, action) => {
     switch (action.type) {
         case actiontypes.SET_SONG_PLAYING_ID:
             return action.songPlayingId;
@@ -37,7 +37,7 @@ export function songPlayingId(state = null, action) {
     }
 }
 
-export function playlistSongPlayingIndex(state = null, action) {
+export const playlistSongPlayingIndex = (state = null, action) => {
     switch (action.type) {
         case actiontypes.SET_PLAYLIST_SONG_PLAYING_INDEX:
             return action.index;
@@ -46,7 +46,7 @@ export function playlistSongPlayingIndex(state = null, action) {
     }
 }
 
-export function artists(state = [], action) {
+export const artists = (state = [], action) => {
     switch (action.type) {
         case actiontypes.ARTISTS_FETCH_DATA_SUCCESS:
             return action.artists;
@@ -55,7 +55,7 @@ export function artists(state = [], action) {
     }
 }
 
-export function albums(state = [], action) {
+export const albums = (state = [], action) => {
     switch (action.type) {
         case actiontypes.ALBUMS_FETCH_DATA_SUCCESS:
             return action.albums;

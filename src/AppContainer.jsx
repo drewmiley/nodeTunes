@@ -24,6 +24,8 @@ class App extends Component {
         fetch(url)
             .then(res => res.json())
             .then(console.log)
+            .then(this.props.fetchArtists)
+            .then(this.props.fetchAlbums)
             .then(() => this.setState({ loading: false }));
     }
 
@@ -31,6 +33,9 @@ class App extends Component {
         if (this.state.loading) {
             return <h1>Loading from { window.location.search.substring(1) }</h1>
         }
+
+        console.log(this.props.albums);
+        console.log(this.props.artists);
 
         return <>
             <div className='half-width'>

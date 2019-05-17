@@ -1,69 +1,39 @@
 import * as actiontypes from './actiontypes';
 
-const songsFetchData = params => dispatch => {
-    let url = `${ process.env.API_URL }/api/songs/title/${ params.title }?sortBy=${ params.sortBy }`;
-    if (params.artist) {
-        url += `&artist=${ params.artist }`;
-    }
-    if (params.album) {
-        url += `&album=${ params.album }`;
-    }
+const fetchAction = (actionType, property) => data => ({
+    type: actionType,
+    [property]: data
+});
 
+const fetchData = (url, action, mapping) => dispatch => {
     fetch(url)
-        .then(response => {
-            if (!response.ok) {
-                throw Error(response.statusText);
-            }
-
-            return response;
-        })
         .then(response => response.json())
         .then(response => response.results)
-        .then(songs => dispatch(songsFetchDataSuccess(songs)));
-};
+        .then(response => response.map(mapping))
+        .then(results => dispatch(action(results)));
+}
 
-const songsFetchDataSuccess = songs => ({
-    type: actiontypes.SONGS_FETCH_DATA_SUCCESS,
-    songs
-});
+const fetchSongs = params => dispatch => {
+    let url = `${ process.env.API_URL }/api/songs/title/${ params.title }?sortBy=${ params.sortBy }`;
+    if (params.artist) { url += `&artist=${ params.artist }`; };
+    if (params.album) { url += `&album=${ params.album }`; };
+
+    const songsFetchDataSuccess = fetchAction(actiontypes.SONGS_FETCH_DATA_SUCCESS, 'songs');
+    const fetchSongs = fetchData(url, songsFetchDataSuccess, d => d);
+    dispatch(fetchSongs);
+};
 
 const fetchArtists = () => dispatch => {
-    fetch(`${ process.env.API_URL }/api/artists`)
-        .then(response => {
-            if (!response.ok) {
-                throw Error(response.statusText);
-            }
-
-            return response;
-        })
-        .then(response => response.json())
-        .then(response => response.results)
-        .then(artists => dispatch(artistsFetchDataSuccess(artists.map(artist => artist.name))));
+    const artistsFetchDataSuccess = fetchAction(actiontypes.ARTISTS_FETCH_DATA_SUCCESS, 'artists');
+    const fetchArtists = fetchData(`${ process.env.API_URL }/api/artists`, artistsFetchDataSuccess, d => d.name);
+    dispatch(fetchArtists);
 };
-
-const artistsFetchDataSuccess = artists => ({
-    type: actiontypes.ARTISTS_FETCH_DATA_SUCCESS,
-    artists
-});
 
 const fetchAlbums = () => dispatch => {
-    fetch(`${ process.env.API_URL }/api/albums`)
-        .then(response => {
-            if (!response.ok) {
-                throw Error(response.statusText);
-            }
-
-            return response;
-        })
-        .then(response => response.json())
-        .then(response => response.results)
-        .then(albums => dispatch(albumsFetchDataSuccess(albums.map(album => album.title))));
+    const albumsFetchDataSuccess = fetchAction(actiontypes.ALBUMS_FETCH_DATA_SUCCESS, 'albums');
+    const fetchAlbums = fetchData(`${ process.env.API_URL }/api/albums`, albumsFetchDataSuccess, d => d.title);
+    dispatch(fetchAlbums);
 };
-
-const albumsFetchDataSuccess = albums => ({
-    type: actiontypes.ALBUMS_FETCH_DATA_SUCCESS,
-    albums
-});
 
 const setSongPlayingId = songPlayingId => dispatch => dispatch({ type: actiontypes.SET_SONG_PLAYING_ID, songPlayingId });
 
@@ -75,7 +45,7 @@ const setPlaylistSongPlayingIndex = index => dispatch => dispatch({type: actiont
 const setPlaylist = songs => dispatch => dispatch({type: actiontypes.SET_PLAYLIST, songs});
 
 export const mapDispatchToProps = dispatch => ({
-    fetchData: params => dispatch(songsFetchData(params)),
+    fetchData: params => dispatch(fetchSongs(params)),
     setSongPlayingId: songPlayingId => dispatch(setSongPlayingId(songPlayingId)),
     addSongToPlaylist: song => dispatch(addSongToPlaylist(song)),
     removeSongFromPlaylist: index => dispatch(removeSongFromPlaylist(index)),

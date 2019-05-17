@@ -1,6 +1,10 @@
 import * as actiontypes from './actiontypes';
 
-export function playlistSongs(state = [], action) {
+const setter = (defaultState, actionType, actionProperty) =>
+    (state = defaultState, action) =>
+    action.type === actionType ? action[actionProperty] : state;
+
+export const playlistSongs = (state = [], action) => {
     const playlistSongs = ((state, action) => {
         switch (action.type) {
             case actiontypes.ADD_SONG_TO_PLAYLIST:
@@ -19,47 +23,8 @@ export function playlistSongs(state = [], action) {
     return playlistSongs;
 }
 
-export function songs(state = [], action) {
-    switch (action.type) {
-        case actiontypes.SONGS_FETCH_DATA_SUCCESS:
-            return action.songs;
-        default:
-            return state;
-    }
-}
-
-export function songPlayingId(state = null, action) {
-    switch (action.type) {
-        case actiontypes.SET_SONG_PLAYING_ID:
-            return action.songPlayingId;
-        default:
-            return state;
-    }
-}
-
-export function playlistSongPlayingIndex(state = null, action) {
-    switch (action.type) {
-        case actiontypes.SET_PLAYLIST_SONG_PLAYING_INDEX:
-            return action.index;
-        default:
-            return state;
-    }
-}
-
-export function artists(state = [], action) {
-    switch (action.type) {
-        case actiontypes.ARTISTS_FETCH_DATA_SUCCESS:
-            return action.artists;
-        default:
-            return state;
-    }
-}
-
-export function albums(state = [], action) {
-    switch (action.type) {
-        case actiontypes.ALBUMS_FETCH_DATA_SUCCESS:
-            return action.albums;
-        default:
-            return state;
-    }
-}
+export const songs = setter([], actiontypes.SONGS_FETCH_DATA_SUCCESS, 'songs');
+export const songPlayingId = setter(null, actiontypes.SET_SONG_PLAYING_ID, 'songPlayingId');
+export const playlistSongPlayingIndex = setter(null, actiontypes.SET_PLAYLIST_SONG_PLAYING_INDEX, 'index');
+export const artists = setter([], actiontypes.ARTISTS_FETCH_DATA_SUCCESS, 'artists');
+export const albums = setter([], actiontypes.ALBUMS_FETCH_DATA_SUCCESS, 'albums');

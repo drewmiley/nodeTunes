@@ -1,41 +1,38 @@
 import * as actiontypes from './actiontypes';
 
-const fetchSongs = params => dispatch => {
-    const songsFetchDataSuccess = songs => ({
-        type: actiontypes.SONGS_FETCH_DATA_SUCCESS,
-        songs
-    });
+const fetchAction = (actionType, property) => data => ({
+    type: actionType,
+    [property]: data
+});
 
+const fetchData = (url, action, mapping) => dispatch => {
+    fetch(url)
+        .then(response => response.json())
+        .then(response => response.results)
+        .then(response => response.map(mapping))
+        .then(results => dispatch(action(results)));
+}
+
+const fetchSongs = params => dispatch => {
     let url = `${ process.env.API_URL }/api/songs/title/${ params.title }?sortBy=${ params.sortBy }`;
     if (params.artist) { url += `&artist=${ params.artist }`; };
     if (params.album) { url += `&album=${ params.album }`; };
 
-    fetch(url)
-        .then(response => response.json())
-        .then(response => response.results)
-        .then(songs => dispatch(songsFetchDataSuccess(songs)));
+    const songsFetchDataSuccess = fetchAction(actiontypes.SONGS_FETCH_DATA_SUCCESS, 'songs');
+    const fetchSongs = fetchData(url, songsFetchDataSuccess, d => d);
+    dispatch(fetchSongs);
 };
 
 const fetchArtists = () => dispatch => {
-    const artistsFetchDataSuccess = artists => ({
-        type: actiontypes.ARTISTS_FETCH_DATA_SUCCESS,
-        artists
-    });
-    fetch(`${ process.env.API_URL }/api/artists`)
-        .then(response => response.json())
-        .then(response => response.results.map(artist => artist.name))
-        .then(artists => dispatch(artistsFetchDataSuccess(artists)));
+    const artistsFetchDataSuccess = fetchAction(actiontypes.ARTISTS_FETCH_DATA_SUCCESS, 'artists');
+    const fetchArtists = fetchData(`${ process.env.API_URL }/api/artists`, artistsFetchDataSuccess, d => d.name);
+    dispatch(fetchArtists);
 };
 
 const fetchAlbums = () => dispatch => {
-    const albumsFetchDataSuccess = albums => ({
-        type: actiontypes.ALBUMS_FETCH_DATA_SUCCESS,
-        albums
-    });
-    fetch(`${ process.env.API_URL }/api/albums`)
-        .then(response => response.json())
-        .then(response => response.results.map(album => album.title))
-        .then(albums => dispatch(albumsFetchDataSuccess(albums)));
+    const albumsFetchDataSuccess = fetchAction(actiontypes.ALBUMS_FETCH_DATA_SUCCESS, 'albums');
+    const fetchAlbums = fetchData(`${ process.env.API_URL }/api/albums`, albumsFetchDataSuccess, d => d.title);
+    dispatch(fetchAlbums);
 };
 
 const setSongPlayingId = songPlayingId => dispatch => dispatch({ type: actiontypes.SET_SONG_PLAYING_ID, songPlayingId });

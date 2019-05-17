@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import AutoComplete from 'react-autocomplete';
+
+import SongSearchAutoComplete from './SongSearchAutoComplete';
 
 const SongSearch = props => {
     const [artist, setArtist] = useState('');
@@ -8,31 +9,21 @@ const SongSearch = props => {
     const [title, setTitle] = useState('');
 
     const fetchData = () => props.fetchData({ artist, album, sortBy, title });
-    // TODO: Refactor autocomplete
+
     return (
         <>
             <button onClick={fetchData}>Fetch Songs</button>
-            <AutoComplete
-                getItemValue={item => item}
+            <SongSearchAutoComplete
+                placeholder='Artist'
                 items={props.artists}
-                renderItem={(item, isHighlighted) =><div style={{ fontSize: '30px', background: isHighlighted ? 'lightgray' : 'white' }} key={item}>{item}</div>}
-                shouldItemRender={(item, value) => item && item.includes(value)}
                 value={artist}
-                inputProps={{ placeholder: 'Artist' }}
-                menuStyle={{ width: '45%' }}
-                onChange={e => setArtist(e.target.value)}
-                onSelect={val => setArtist(val)}
+                setValue={setArtist}
             />
-            <AutoComplete
-                getItemValue={item => item}
+            <SongSearchAutoComplete
+                placeholder='Album'
                 items={props.albums}
-                renderItem={(item, isHighlighted) =><div style={{ fontSize: '30px', background: isHighlighted ? 'lightgray' : 'white' }} key={item}>{item}</div>}
-                shouldItemRender={(item, value) => item && item.includes(value)}
                 value={album}
-                inputProps={{ placeholder: 'Album' }}
-                menuStyle={{ width: '45%' }}
-                onChange={e => setAlbum(e.target.value)}
-                onSelect={val => setAlbum(val)}
+                setValue={setAlbum}
             />
             <input type='text' placeholder='Title' onChange={(e) => setTitle(e.target.value)}/>
             <select defaultValue={sortBy} onChange={(e) => setSortBy(e.target.value)}>

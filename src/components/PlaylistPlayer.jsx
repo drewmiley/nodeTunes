@@ -13,7 +13,7 @@ const PlaylistPlayer = props => {
             src: [songs[index].location],
             html5: true
         });
-        playlistValue._onpause[0] = { fn: () => navigatePlaylist(1 + playIndex, playlistValue) };
+        playlistValue._onend[0] = { fn: () => navigatePlaylist(1 + playIndex, playlistValue) };
         return playlistValue;
     }
 
@@ -69,7 +69,7 @@ const PlaylistPlayer = props => {
             if (playIndex > -1) {
                 props.setPlaylistSongPlayingIndex(playIndex);
                 const playlistValue = playlist;
-                playlistValue._onpause[0] = { fn: () => navigatePlaylist(1 + playIndex, playlistValue) };
+                playlistValue._onend[0] = { fn: () => navigatePlaylist(1 + playIndex, playlistValue) };
                 setPlaylist(playlistValue);
             } else {
                 stopPlaylist();

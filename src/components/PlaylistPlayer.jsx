@@ -9,12 +9,11 @@ const PlaylistPlayer = props => {
     const [paused, setPaused] = useState(false);
 
     const getHowl = (songs, index, p = playlist) => {
-        console.log("getHowl");
         const playlistValue = p || new Howl({
             src: [songs[index].location],
             html5: true
         });
-        playlistValue.on('pause', () => navigatePlaylist(1 + index, playlistValue));
+        playlistValue._onpause[0] = { fn: () => navigatePlaylist(1 + playIndex, playlistValue) };
         return playlistValue;
     }
 
@@ -26,7 +25,6 @@ const PlaylistPlayer = props => {
     }
 
     const navigatePlaylist = (index, p = playlist) => {
-        console.log('navigatePlaylist');
         p.stop(id);
         const playIndex = (index + props.songs.length) % props.songs.length;
         const playlistValue = getHowl(props.songs, playIndex, null);
@@ -67,12 +65,11 @@ const PlaylistPlayer = props => {
     const onSongsChange = playlist => {
         if (playlist) {
             // TODO: Navigate doesn't work for more than one instance of the same song
-            console.log("songChange")
             const playIndex = props.songs.map(song => song.location).indexOf(playlist._src);
             if (playIndex > -1) {
                 props.setPlaylistSongPlayingIndex(playIndex);
                 const playlistValue = playlist;
-                playlistValue.on('pause', () => navigatePlaylist(1 + playIndex, playlistValue));
+                playlistValue._onpause[0] = { fn: () => navigatePlaylist(1 + playIndex, playlistValue) };
                 setPlaylist(playlistValue);
             } else {
                 stopPlaylist();

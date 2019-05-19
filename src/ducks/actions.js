@@ -25,13 +25,13 @@ const fetchSongs = params => dispatch => {
 
 const fetchArtists = () => dispatch => {
     const artistsFetchDataSuccess = fetchAction(actiontypes.ARTISTS_FETCH_DATA_SUCCESS, 'artists');
-    const fetchArtists = fetchData(`${ process.env.API_URL }/api/artists`, artistsFetchDataSuccess, d => d.name);
+    const fetchArtists = fetchData(`${ process.env.API_URL }/api/artists`, artistsFetchDataSuccess, d => d);
     dispatch(fetchArtists);
 };
 
 const fetchAlbums = () => dispatch => {
     const albumsFetchDataSuccess = fetchAction(actiontypes.ALBUMS_FETCH_DATA_SUCCESS, 'albums');
-    const fetchAlbums = fetchData(`${ process.env.API_URL }/api/albums`, albumsFetchDataSuccess, d => d.title);
+    const fetchAlbums = fetchData(`${ process.env.API_URL }/api/albums`, albumsFetchDataSuccess, d => d);
     dispatch(fetchAlbums);
 };
 

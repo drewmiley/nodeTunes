@@ -15,13 +15,13 @@ const SongSearch = props => {
             <button onClick={fetchData}>Fetch Songs</button>
             <SongSearchAutoComplete
                 placeholder='Artist'
-                items={props.artists}
+                items={props.artists.map(d => d.name)}
                 value={artist}
                 setValue={setArtist}
             />
             <SongSearchAutoComplete
                 placeholder='Album'
-                items={props.albums}
+                items={props.albums.map(d => d.title)}
                 value={album}
                 setValue={setAlbum}
             />

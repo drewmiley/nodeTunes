@@ -5,11 +5,10 @@ const fetchAction = (actionType, property) => data => ({
     [property]: data
 });
 
-const fetchData = (url, action, mapping) => dispatch => {
+const fetchData = (url, action) => dispatch => {
     fetch(url)
         .then(response => response.json())
         .then(response => response.results)
-        .then(response => response.map(mapping))
         .then(results => dispatch(action(results)));
 }
 
@@ -19,19 +18,19 @@ const fetchSongs = params => dispatch => {
     if (params.album) { url += `&album=${ params.album }`; };
 
     const songsFetchDataSuccess = fetchAction(actiontypes.SONGS_FETCH_DATA_SUCCESS, 'songs');
-    const fetchSongs = fetchData(url, songsFetchDataSuccess, d => d);
+    const fetchSongs = fetchData(url, songsFetchDataSuccess);
     dispatch(fetchSongs);
 };
 
 const fetchArtists = () => dispatch => {
     const artistsFetchDataSuccess = fetchAction(actiontypes.ARTISTS_FETCH_DATA_SUCCESS, 'artists');
-    const fetchArtists = fetchData(`${ process.env.API_URL }/api/artists`, artistsFetchDataSuccess, d => d);
+    const fetchArtists = fetchData(`${ process.env.API_URL }/api/artists`, artistsFetchDataSuccess);
     dispatch(fetchArtists);
 };
 
 const fetchAlbums = () => dispatch => {
     const albumsFetchDataSuccess = fetchAction(actiontypes.ALBUMS_FETCH_DATA_SUCCESS, 'albums');
-    const fetchAlbums = fetchData(`${ process.env.API_URL }/api/albums`, albumsFetchDataSuccess, d => d);
+    const fetchAlbums = fetchData(`${ process.env.API_URL }/api/albums`, albumsFetchDataSuccess);
     dispatch(fetchAlbums);
 };
 

@@ -13,7 +13,7 @@ const PlaylistPlayer = props => {
             src: [songs[index].location],
             html5: true
         });
-        playlistValue._onend[0] = { fn: () => navigatePlaylist(1 + playIndex, playlistValue) };
+        playlistValue._onend[0] = { fn: () => navigatePlaylist(1 + index, playlistValue) };
         return playlistValue;
     }
 

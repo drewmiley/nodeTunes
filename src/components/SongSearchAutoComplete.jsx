@@ -6,7 +6,7 @@ const SongSearchAutoComplete = props => {
         <div style={{ display: 'list-item' }}>
             <AutoComplete
                 getItemValue={item => item}
-                items={props.items}
+                items={props.items.sort()}
                 renderItem={(item, isHighlighted) =><div style={{ fontSize: '30px', background: isHighlighted ? 'lightgray' : 'white' }} key={item}>{item}</div>}
                 shouldItemRender={(item, value) => item && item.toUpperCase().includes(value.toUpperCase())}
                 value={props.value}

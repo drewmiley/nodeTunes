@@ -10,18 +10,26 @@ const SongSearch = props => {
 
     const fetchData = () => props.fetchData({ artist, album, sortBy, title });
 
+    const filteredArtists = props.artists
+        .filter(a => !album || a.albums.filter(d => d && d.toLowerCase().includes(album.toLowerCase())).length)
+        .map(d => d.name);
+
+    const filteredAlbums = props.albums
+        .filter(a => !artist || a.artist.toLowerCase().includes(artist.toLowerCase()))
+        .map(d => d.title);
+
     return (
         <>
             <button onClick={fetchData}>Fetch Songs</button>
             <SongSearchAutoComplete
                 placeholder='Artist'
-                items={props.artists.map(d => d.name)}
+                items={filteredArtists}
                 value={artist}
                 setValue={setArtist}
             />
             <SongSearchAutoComplete
                 placeholder='Album'
-                items={props.albums.map(d => d.title)}
+                items={filteredAlbums}
                 value={album}
                 setValue={setAlbum}
             />

@@ -18,7 +18,8 @@ const PlaylistPlayer = props => {
     }
 
     const playPlaylist = () => {
-        const initialIndex = 0;
+        const initialIndex = playlist && props.songs.map(d => d.location).indexOf(playlist._src) >= 0 ?
+            props.songs.map(d => d.location).indexOf(playlist._src) : 0;
         const playlistValue = getHowl(props.songs, initialIndex);
         const idValue = playlistValue.play(id);
         startPlaying(idValue, playlistValue, initialIndex);

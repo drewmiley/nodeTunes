@@ -18,6 +18,7 @@ const fetchSongs = params => dispatch => {
     if (params.album) { url += `&album=${ params.album }`; };
 
     const songsFetchDataSuccess = fetchAction(actiontypes.SONGS_FETCH_DATA_SUCCESS, 'songs');
+    dispatch(songsFetchDataSuccess([]));
     const fetchSongs = fetchData(url, songsFetchDataSuccess);
     dispatch(fetchSongs);
 };

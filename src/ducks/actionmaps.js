@@ -22,7 +22,7 @@ export const albums = {
 }
 
 export const playlistSongs = {
-    [actiontypes.ADD_SONG_TO_PLAYLIST]: null,
-    [actiontypes.REMOVE_SONG_FROM_PLAYLIST]: null,
-    [actiontypes.SET_PLAYLIST]: null
+    [actiontypes.ADD_SONG_TO_PLAYLIST]: stateupdaters.addSongToPlaylist,
+    [actiontypes.REMOVE_SONG_FROM_PLAYLIST]: stateupdaters.removeSongFromPlaylist,
+    [actiontypes.SET_PLAYLIST]: stateupdaters.setPlaylist
 }

@@ -6,6 +6,18 @@ export const playlistSongPlayingIndex = setter('index');
 export const artists = setter('artists');
 export const albums = setter('albums');
 
+export const addSongToPlaylist = state => payload => {
+    return null;
+}
+
+export const removeSongFromPlaylist = state => payload => {
+    return null;
+}
+
+export const setPlaylist = state => payload => {
+    return null;
+}
+
 // export const playlistSongs = (state = [], action) => {
 //     const playlistSongs = ((state, action) => {
 //         switch (action.type) {

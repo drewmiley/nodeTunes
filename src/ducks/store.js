@@ -3,6 +3,7 @@ import anonReducer from 'redux-anon-reducer';
 import thunk from 'redux-thunk';
 import { combineReducers } from 'redux';
 
+import * as actionmaps from './actionmaps';
 import * as reducers from './reducers';
 
 const sessionStoragePlaylistSongs = localStorage.getItem('playlistSongs');
@@ -20,11 +21,11 @@ const initialState = {
 
 const reducer = combineReducers({
     playlistSongs: reducers.playlistSongs,
-    songs: reducers.songs,
-    songPlayingId: reducers.songPlayingId,
-    playlistSongPlayingIndex: reducers.playlistSongPlayingIndex,
-    artists: reducers.artists,
-    albums: reducers.albums
+    songs: anonReducer(actionmaps.songs, []),
+    songPlayingId: anonReducer(actionmaps.songPlayingId, null),
+    playlistSongPlayingIndex: anonReducer(actionmaps.playlistSongPlayingIndex, null),
+    artists: anonReducer(actionmaps.artists, []),
+    albums: anonReducer(actionmaps.albums, [])
 });
 
 export default createStore(reducer, initialState, applyMiddleware(thunk));

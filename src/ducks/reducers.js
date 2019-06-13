@@ -1,9 +1,5 @@
 import * as actiontypes from './actiontypes';
 
-const setter = (defaultState, actionType, actionProperty) =>
-    (state = defaultState, action) =>
-    action.type === actionType ? action[actionProperty] : state;
-
 export const playlistSongs = (state = [], action) => {
     const playlistSongs = ((state, action) => {
         switch (action.type) {
@@ -22,9 +18,3 @@ export const playlistSongs = (state = [], action) => {
     }
     return playlistSongs;
 }
-
-export const songs = setter([], actiontypes.SONGS_FETCH_DATA_SUCCESS, 'songs');
-export const songPlayingId = setter(null, actiontypes.SET_SONG_PLAYING_ID, 'songPlayingId');
-export const playlistSongPlayingIndex = setter(null, actiontypes.SET_PLAYLIST_SONG_PLAYING_INDEX, 'index');
-export const artists = setter([], actiontypes.ARTISTS_FETCH_DATA_SUCCESS, 'artists');
-export const albums = setter([], actiontypes.ALBUMS_FETCH_DATA_SUCCESS, 'albums');

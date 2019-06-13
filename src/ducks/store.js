@@ -1,25 +1,30 @@
 import { createStore, applyMiddleware } from 'redux';
+import anonReducer from 'redux-anon-reducer';
 import thunk from 'redux-thunk';
 import { combineReducers } from 'redux';
-import { playlistSongs, songs, songPlayingId, playlistSongPlayingIndex, artists, albums } from './reducers';
 
-const reducer = combineReducers({
-    playlistSongs,
-    songs,
-    songPlayingId,
-    playlistSongPlayingIndex,
-    artists,
-    albums
-});
+import * as reducers from './reducers';
 
 const sessionStoragePlaylistSongs = localStorage.getItem('playlistSongs');
-const playlistSongsValue = (sessionStoragePlaylistSongs && sessionStoragePlaylistSongs !== "undefined") ? JSON.parse(sessionStoragePlaylistSongs) : [];
+const playlistSongsValue = (sessionStoragePlaylistSongs && sessionStoragePlaylistSongs !== "undefined") ?
+    JSON.parse(sessionStoragePlaylistSongs) : [];
 
-export default createStore(reducer, {
+const initialState = {
     playlistSongs: playlistSongsValue,
     artists: [],
     albums: [],
     songs: [],
     songPlayingId: null,
     playlistSongPlayingIndex: null
-}, applyMiddleware(thunk));
+}
+
+const reducer = combineReducers({
+    playlistSongs: reducers.playlistSongs,
+    songs: reducers.songs,
+    songPlayingId: reducers.songPlayingId,
+    playlistSongPlayingIndex: reducers.playlistSongPlayingIndex,
+    artists: reducers.artists,
+    albums: reducers.albums
+});
+
+export default createStore(reducer, initialState, applyMiddleware(thunk));

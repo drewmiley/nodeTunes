@@ -4,7 +4,6 @@ import thunk from 'redux-thunk';
 import { combineReducers } from 'redux';
 
 import * as actionmaps from './actionmaps';
-import * as reducers from './reducers';
 
 const sessionStoragePlaylistSongs = localStorage.getItem('playlistSongs');
 const playlistSongsValue = (sessionStoragePlaylistSongs && sessionStoragePlaylistSongs !== "undefined") ?
@@ -20,7 +19,7 @@ const initialState = {
 }
 
 const reducer = combineReducers({
-    playlistSongs: reducers.playlistSongs,
+    playlistSongs: anonReducer(actionmaps.playlistSongs, playlistSongsValue),
     songs: anonReducer(actionmaps.songs, []),
     songPlayingId: anonReducer(actionmaps.songPlayingId, null),
     playlistSongPlayingIndex: anonReducer(actionmaps.playlistSongPlayingIndex, null),

@@ -1,4 +1,4 @@
-const setter = actionProperty => (state = defaultState, action) => action[actionProperty];
+const setter = actionProperty => (state = defaultState, action) => action.payload[actionProperty];
 
 export const songs = setter('songs');
 export const songPlayingId = setter('songPlayingId');

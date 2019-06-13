@@ -13,8 +13,5 @@ export const playlistSongs = (state = [], action) => {
                 return state;
         }
     })(state, action);
-    if (Object.keys(actiontypes).includes(action.type)) {
-        localStorage.setItem('playlistSongs', JSON.stringify(playlistSongs));
-    }
     return playlistSongs;
 }

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useEffect } from 'react';
 import { arrayMove } from 'react-sortable-hoc';
 
 import PlaylistPlayer from './PlaylistPlayer';
@@ -13,6 +13,10 @@ const Playlist = props => {
         }
         props.setPlaylist(newPlaylist);
     };
+
+    useEffect(() => {
+        localStorage.setItem('playlistSongs', JSON.stringify(props.songs));
+    }, [props.songs]);
 
     return (
         <>

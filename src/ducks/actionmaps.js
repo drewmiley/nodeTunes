@@ -20,3 +20,9 @@ export const artists = {
 export const albums = {
     [actiontypes.ALBUMS_FETCH_DATA_SUCCESS]: stateupdaters.albums
 }
+
+export const playlistSongs = {
+    [actiontypes.ADD_SONG_TO_PLAYLIST]: null,
+    [actiontypes.REMOVE_SONG_FROM_PLAYLIST]: null,
+    [actiontypes.SET_PLAYLIST]: null
+}

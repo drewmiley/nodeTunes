@@ -1,6 +1,5 @@
-export default (actionMap, initialReturn = null, defaultReturn = undefined) =>
+export default (actionMap, initialReturn = null) =>
     (state, action) =>
-        (actionMap[action.type] || ( d => () => (defaultReturn === undefined ? d : defaultReturn)))
-        //             (state === Object(state) ? Object.assign({}, state) : state)
-            (state !== undefined ? state : initialReturn)
+        (actionMap[action.type] || ( d => () => d))
+            (state !== undefined ? (state === Object(state) && !Array.isArray(state) ? Object.assign({}, state) : state) : initialReturn)
                 (action.payload);

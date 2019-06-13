@@ -1,5 +1,5 @@
 import { createStore, applyMiddleware } from 'redux';
-import anonReducer from '../redux-anon-reducer';
+import anonReducer from 'redux-anon-reducer';
 import thunk from 'redux-thunk';
 import { combineReducers } from 'redux';
 

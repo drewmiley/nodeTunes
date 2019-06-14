@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Node Tunes</title>
+    <style>
+        #root {
+            display: flex;
+            overflow: hidden;
+            height: 100vh;
+            margin-top: -100px;
+            padding-top: 100px;
+            position: relative;
+            width: 100%;
+            backface-visibility: hidden;
+            will-change: overflow;
+        }
+        .half-width {
+            width: 50%;
+            display: inline-block;
+            float:left;
+            overflow: auto;
+            height: auto;
+            padding: .5rem;
+            -webkit-overflow-scrolling: touch;
+            -ms-overflow-style: none;
+        }
+        .active-button {
+            background-color: green;
+        }
+        .playlistSongPlaying {
+            background: lightgreen;
+        }
+        .emptyPlaylist {
+            visibility: hidden;
+        }
+        button {
+            background-color: lightblue;
+        }
+        button, input, select, .songContainer {
+            border: 2px solid black;
+        }
+        p, input, button, select {
+            font-size: 40px;
+        }
+        input {
+            width: 100%;
+        }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script src="./app.js"></script>
+  </body>
+</html>

@@ -2,7 +2,7 @@ import * as actiontypes from './actiontypes';
 
 const fetchAction = (actionType, property) => data => ({
     type: actionType,
-    [property]: data
+    payload: { [property]: data }
 });
 
 const fetchData = (url, action) => dispatch => {
@@ -35,14 +35,14 @@ const fetchAlbums = () => dispatch => {
     dispatch(fetchAlbums);
 };
 
-const setSongPlayingId = songPlayingId => dispatch => dispatch({ type: actiontypes.SET_SONG_PLAYING_ID, songPlayingId });
+const setSongPlayingId = songPlayingId => dispatch => dispatch({ type: actiontypes.SET_SONG_PLAYING_ID, payload: { songPlayingId } });
 
-const addSongToPlaylist = song => dispatch => dispatch({ type: actiontypes.ADD_SONG_TO_PLAYLIST, song });
-const removeSongFromPlaylist = index => dispatch => dispatch({ type: actiontypes.REMOVE_SONG_FROM_PLAYLIST, index });
+const addSongToPlaylist = song => dispatch => dispatch({ type: actiontypes.ADD_SONG_TO_PLAYLIST, payload: { song } });
+const removeSongFromPlaylist = index => dispatch => dispatch({ type: actiontypes.REMOVE_SONG_FROM_PLAYLIST, payload: { index } });
 
-const setPlaylistSongPlayingIndex = index => dispatch => dispatch({type: actiontypes.SET_PLAYLIST_SONG_PLAYING_INDEX, index});
+const setPlaylistSongPlayingIndex = index => dispatch => dispatch({type: actiontypes.SET_PLAYLIST_SONG_PLAYING_INDEX, payload: { index } });
 
-const setPlaylist = songs => dispatch => dispatch({type: actiontypes.SET_PLAYLIST, songs});
+const setPlaylist = songs => dispatch => dispatch({type: actiontypes.SET_PLAYLIST, payload: { songs } });
 
 export const mapDispatchToProps = dispatch => ({
     fetchData: params => dispatch(fetchSongs(params)),

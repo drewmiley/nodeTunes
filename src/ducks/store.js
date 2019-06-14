@@ -1,7 +1,6 @@
-import { createStore, applyMiddleware } from 'redux';
-import anonReducer from 'redux-anon-reducer';
+import { combineReducers, createStore, applyMiddleware } from 'redux';
+import { anonReducersFromInitialState } from 'redux-anon-reducer';
 import thunk from 'redux-thunk';
-import { combineReducers } from 'redux';
 
 import * as actionmaps from './actionmaps';
 
@@ -18,7 +17,6 @@ const initialState = {
     playlistSongPlayingIndex: null
 }
 
-const reducer = combineReducers(Object.assign({}, ...Object.keys(initialState)
-    .map(k => ({[k]: anonReducer(actionmaps[k], initialState[k])}))))
+const reducer = combineReducers(anonReducersFromInitialState(actionmaps, initialState));
 
 export default createStore(reducer, initialState, applyMiddleware(thunk));

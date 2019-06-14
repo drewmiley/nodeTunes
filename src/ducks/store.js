@@ -18,13 +18,7 @@ const initialState = {
     playlistSongPlayingIndex: null
 }
 
-const reducer = combineReducers({
-    playlistSongs: anonReducer(actionmaps.playlistSongs, playlistSongsValue),
-    songs: anonReducer(actionmaps.songs, []),
-    songPlayingId: anonReducer(actionmaps.songPlayingId, null),
-    playlistSongPlayingIndex: anonReducer(actionmaps.playlistSongPlayingIndex, null),
-    artists: anonReducer(actionmaps.artists, []),
-    albums: anonReducer(actionmaps.albums, [])
-});
+const reducer = combineReducers(Object.assign({}, ...Object.keys(initialState)
+    .map(k => ({[k]: anonReducer(actionmaps[k], initialState[k])}))))
 
 export default createStore(reducer, initialState, applyMiddleware(thunk));

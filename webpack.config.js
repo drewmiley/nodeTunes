@@ -7,7 +7,7 @@ module.exports = env => {
     target: "web",
     mode: "development",
     devtool: "source-map",
-    entry: "./src/index.jsx",
+    entry: ["@babel/polyfill", "./src/index.jsx"],
     output: {
       path: path.resolve(__dirname),
       filename: "app.js",

@@ -26,7 +26,6 @@
     "node-fetch": "^2.3.0",
     "react": "^16.9.0",
     "react-autocomplete": "^1.8.1",
-    "react-cache": "^2.0.0-alpha.1",
     "react-dom": "^16.8.6",
     "react-redux": "^5.0.7",
     "react-sortable-hoc": "^1.4.0",

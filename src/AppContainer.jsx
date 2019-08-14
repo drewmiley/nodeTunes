@@ -11,20 +11,23 @@ const App = props => {
 
     useEffect(() => {
         if (loading) {
-            let url = `${ process.env.API_URL }/api/`;
-            if (window.location.search.substring(1)) {
-                console.log(`loading from ${ window.location.search.substring(1) }`);
-                url += `loadNewLibrary?url=${ window.location.search.substring(1) }`;
-            } else {
-                console.log('clearing library');
-                url += 'clearLibrary';
+            const init = async () => {
+                let url = `${ process.env.API_URL }/api/`;
+                if (window.location.search.substring(1)) {
+                    console.log(`loading from ${ window.location.search.substring(1) }`);
+                    url += `loadNewLibrary?url=${ window.location.search.substring(1) }`;
+                } else {
+                    console.log('clearing library');
+                    url += 'clearLibrary';
+                }
+                const load = await fetch(url);
+                const loadJson = await load.json();
+                console.log(loadJson);
+                await props.fetchArtists();
+                await props.fetchAlbums();
+                setLoading(false);
             }
-            fetch(url)
-                .then(res => res.json())
-                .then(console.log)
-                .then(props.fetchArtists)
-                .then(props.fetchAlbums)
-                .then(() => setLoading(false));
+            init();
         }
     });
 

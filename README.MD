@@ -6,10 +6,11 @@ Backend serving iTunes data, frontend plays music. Uses node, react, howl. Now w
 
 1. `npm install -g http-server`
 1. `npm install`
+1. If starting from rundemo, copy contents of Archive folder to Music directory
+1. `npm run music`
 1. `npm run server`
 1. `npm run app`
-1. `npm run music`
-1. Set SERVERLOCATION to where you server your music and library xml 
+1. Set SERVERLOCATION to where you server your music and library xml (by default, `http://localhost:3000`) 
 1. Add `?{ SERVERLOCATION }` to end of music player url
 
 ## To run externally

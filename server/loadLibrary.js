@@ -23,8 +23,11 @@ const loadLibrary = async (url) => {
         .replace(/\<date\>/g, ':\"')
         .replace(/\<\/date\>/g, '\",')
         .replace(/\,}/g, '}')
-        .replace(/\"Compilation\"\<true\/\>/g, '');
+        .replace(/\"Compilation\"\<true\/\>/g, '')
+        .replace(/\"Album Rating Computed\"\<true\/\>/g, '')
+        .replace(/\"Rating Computed\"\<true\/\>/g, '');
     const json = '['.concat(xmlToJSON.substring(1, xmlToJSON.length - 1), ']');
+    console.log(json.substring(3772900, 3773900));
     return JSON.parse('['.concat(xmlToJSON.substring(1, xmlToJSON.length - 1), ']'));
 };
 

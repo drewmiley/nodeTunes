@@ -34,9 +34,7 @@
     "redux-thunk": "^2.3.0",
     "webpack": "^4.16.3",
     "webpack-cli": "^3.1.0",
-    "webpack-dev-server": "^3.8.0"
-  },
-  "devDependencies": {
+    "webpack-dev-server": "^3.8.0",
     "workbox-webpack-plugin": "^5.1.3"
-  }
+  },
 }

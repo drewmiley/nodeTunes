@@ -1,6 +1,6 @@
 {
-  "short_name": "Football Update",
-  "name": "Live Football Score Update",
+  "short_name": "nodeTunes",
+  "name": "nodeTunes",
   "icons": [
     {
       "src": "../images/favicon.gif",
@@ -8,7 +8,7 @@
       "type": "image/gif"
     },
     {
-      "src": "../images/football-logo.png",
+      "src": "../images/nodeTunes.png",
       "type": "image/png",
       "sizes": "256x256"
     }

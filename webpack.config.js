@@ -1,4 +1,5 @@
 const CopyWebpackPlugin = require("copy-webpack-plugin");
+const WorkboxPlugin = require('workbox-webpack-plugin');
 const path = require('path');
 const webpack = require('webpack');
 
@@ -33,7 +34,15 @@ module.exports = env => {
       new webpack.DefinePlugin({
         'process.env.API_URL': JSON.stringify(env.API_URL)
       }),
-      new CopyWebpackPlugin(["src/index.html"])
+      new WorkboxPlugin.GenerateSW({
+        clientsClaim: true,
+        skipWaiting: true
+      }),
+      new CopyWebpackPlugin([
+        { from: 'src/images', to: 'images' },
+        { from: 'src/manifest', to: 'manifest' },
+        { from: 'src/index.html', to: 'index.html' }
+      ])
     ]
   }
 };
